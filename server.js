@@ -28,10 +28,9 @@ app.use('/api',apis);
 
 app.get('/:page', function(req, res){
     var ext = path.extname(req.params.page);
-    // console.log(ext);
     if(ext=="")
     res.sendFile(__dirname+ '/frontend/html/'+ req.params.page+".html");
-    //else  res.sendFile(__dirname+ '/frontend/'+ req.params.page);
+   
 })
 
 var port= process.env.PORT  || 3000;
