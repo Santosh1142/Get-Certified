@@ -1,0 +1,24 @@
+{
+  "name": "get-certified",
+  "version": "1.0.0",
+  "description": "Get Certified generates the certificates of contests for users",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NIKHILMOHAN063/Get-Certified.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NIKHILMOHAN063/Get-Certified/issues"
+  },
+  "homepage": "https://github.com/NIKHILMOHAN063/Get-Certified#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.12.13",
+    "shortid": "^2.2.16"
+  }
+}
