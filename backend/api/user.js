@@ -1,9 +1,10 @@
 var express = require('express');
+const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const shortid = require("shortid");
 const jwt = require("jsonwebtoken");
 const sgMail = require("@sendgrid/mail");
-const emailTemplates = require("");
+//const emailTemplates = require("");
 
 
 var item= require('../itemlib');
@@ -24,9 +25,10 @@ router.get("/:userid", (req, res) => {
 })
 
 router.post("/signup", async(req, res, next) => {
-   
+    console.log(req.body)
     item.getItemByQuery({ email: req.body.email }, User, (err, user) => {
         if (err) {
+            console.log("err");
             res.status(500).json({
                 error: err,
             });
@@ -63,26 +65,26 @@ router.post("/signup", async(req, res, next) => {
                                 await result
                                     .save()
                                     .then((result1) => {
-                                        const msg = {
-                                            to: result.email,
-                                            from: process.env.sendgridEmail,
-                                            subject: "Quizzie: Email Verification",
-                                            text: " ",
-                                            html: emailTemplates.VERIFY_EMAIL(result1),
-                                        };
+                                        // const msg = {
+                                        //     to: result.email,
+                                        //     from: process.env.sendgridEmail,
+                                        //     subject: "Quizzie: Email Verification",
+                                        //     text: " ",
+                                        //     html: emailTemplates.VERIFY_EMAIL(result1),
+                                        // };
 
-                                        sgMail
-                                            .send(msg)
-                                            .then((result) => {
-                                                console.log("Email sent");
-                                            })
-                                            .catch((err) => {
-                                                console.log(err.toString());
-                                                res.status(500).json({
-                                                    // message: "something went wrong1",
-                                                    error: err,
-                                                });
-                                            });
+                                        // sgMail
+                                        //     .send(msg)
+                                        //     .then((result) => {
+                                        //         console.log("Email sent");
+                                        //     })
+                                        //     .catch((err) => {
+                                        //         console.log(err.toString());
+                                        //         res.status(500).json({
+                                        //             // message: "something went wrong1",
+                                        //             error: err,
+                                        //         });
+                                        //     });
                                         res.status(201).json({
                                             message: "user created",
                                             userDetails: {
@@ -211,4 +213,4 @@ router.post("/login", async(req, res, next) => {
     });
 });
 
-module.exports=app;
+module.exports=router;
