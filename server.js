@@ -20,9 +20,9 @@ mongoose.connection.on('connected', function()
 {console.log("Database Connected");})
 
 
-// app.get('/', function(req, res){
-//    res.sendFile(__dirname+ '/frontend/html/resume.html'); 
-// })
+app.get('/', function(req, res){
+  res.sendFile(__dirname+ '/frontend/html/index.html'); 
+ })
 
 app.use(express.static(__dirname+'/frontend'));
 app.use('/api',apis);
