@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Contest = require("./contest");
+const Participant=require('./participants');
 
 const userSchema = mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
@@ -19,7 +20,10 @@ const userSchema = mongoose.Schema({
     contests: [{
         contestId: { type: mongoose.Schema.Types.ObjectId, ref: "Contest" },
         name: { type: Number },
-        participants: [],
+        participants: [
+            { participantId: { type: mongoose.Schema.Types.ObjectId, ref: "Participant"},
+
+            }],
         timecreated: { type: Number },
     } ],
     
