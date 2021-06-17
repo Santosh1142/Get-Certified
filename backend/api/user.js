@@ -14,14 +14,22 @@ var Contest= require('../models/contest');
 const router = express.Router();
 
 router.get("/:userid", (req, res) => {
-    item.getItemById(req.params.userid, User, (err, result) => {
-        if (err)
-            console.log("error", e);
-        else {
-            console.log(result);
-            res.send(result);
-        }
-    })
+    query={_id:req.params.userid};
+    populateJson = {
+        path: "contests",
+        populate: { path: "contestId", populate: { path: "contestname" } }
+    }
+    // item.getItemById(req.params.userid, User, (err, result) => {
+    //     if (err)
+    //         console.log("error", e);
+    //     else {
+    //         console.log(result);
+    //         res.send(result);
+    //     }
+    // })
+    item.getItemByIdWithPopulate(req.params.userid,User,populateJson, (err,data)=>
+    { res.status(409).json({result:data});})
+   
 })
 
 router.post("/signup", async(req, res, next) => {
