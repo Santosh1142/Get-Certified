@@ -20,17 +20,16 @@ mongoose.connection.on('connected', function()
 {console.log("Database Connected");})
 
 
-app.get('/', function(req, res){
-  res.sendFile(__dirname+ '/frontend/html/index.html'); 
- })
-
-app.use(express.static(__dirname+'/frontend'));
-app.use('/api',apis);
 
 // var userauth= require("./backend/api/userauth");
 // app.use("/api/auth",userauth);
 
+app.use(express.static(__dirname+'/frontend'));
+app.use('/api',apis);
 
+app.get('/', function(req, res){
+    res.sendFile(__dirname+ '/frontend/html/index.html'); 
+ })
 app.get('/:page', function(req, res){
     var ext = path.extname(req.params.page);
     if(ext=="")
