@@ -1,20 +1,33 @@
 
-var thead = "<tr><th>Contest Name</th><th>Description</th><th>Range of Excellence</th><th></th></tr>"
+var thead = "<tr><th>Contest Name</th><th>Created On</th><th>Username</th><th></th></tr>"
 
-function displayTable(data){
-    console.log(data)
-    var t = thead;
-    for(let i=0;i<data.length;i++)
-        t += "<tr><td>"+data[i].contestName+"</td><td>"+data[i].description+"</td><td>"+data[i].rangeOfExcellence+"</td><td><button class='btn btn-primary'>Add Participants Data</button></td></tr>";
-    $("#contestTable").html(t);
+// function displayTable(data){
+//     console.log(data)
+//     var t = thead;
+//     for(let i=0;i<data.length;i++)
+//         t += "<tr><td>"+data[i].contestname+"</td><td>"+data[i].userid+"</td><td>"+data[i].userName+"</td><td><button id="+data[i].userid+" class='btn btn-primary'>Add Participants Data</button></td></tr>";
+//     $("#contestTable").html(t);
+// }
+
+function fillTable(){
+    $.ajax({
+        url : `api/contest/user/60cb03543e33191288793b69`,
+        type : 'GET',
+        success : (data)=>{
+            console.log(data)
+            data = data.result;
+            var t= thead;
+            for(let i=0;i<data.length;i++){
+                t += "<tr><td>"+data[i].contestname+"</td><td>"+data[i].creationtime+"</td><td>"+data[i].userName+"</td><td><button id="+data[i].userId+" class='btn btn-primary'>Add Participants Data</button></td></tr>";
+            }
+            $("#contestTable").html(t);
+        }
+    })
 }
 
 $(document).ready(()=>{
 
-    $.get('/api/sample',(data)=>{
-        if(data!=null)
-            displayTable(data);
-    })
+    fillTable();
 
     $("#addContest").click(()=>{
         
@@ -24,14 +37,21 @@ $(document).ready(()=>{
 
     $("#formSubmit").click(()=>{
         var contestData = {
-            contestName : $("#contestName").val(),
-            description : $("#descp").val(),
-            rangeOfExcellence : $("#range").val()
+            contestname : $("#contestname").val(),
+            username : 'Nikhil',
+            description : $("descp").val(),
+            organisation : $("organisation").val(),
         }
-        $.post('/api/sample', { data : contestData})
-        $.get('/api/sample',(data)=>{
-            if(data!=null)
-                displayTable(data);
+        
+        console.log(contestData)
+        $.ajax({
+            url : `api/contest/add/60cb03543e33191288793b69`,
+            type : 'POST',
+            data : contestData,
+            success : (result)=>{
+                // console.log(result)
+                fillTable();
+            }
         })
 
 
@@ -40,10 +60,14 @@ $(document).ready(()=>{
     })
 
     $(this).click((e)=>{
-        var btn = $(e.target).attr('class')
-        if(btn == "btn btn-primary"){
-            console.log($(this).closest('tr').find('td:eq(1)').text())
+        var btn = $(e.target).attr('id')
+        var btnClass = $(e.target).attr('class')
+        
+        if(btnClass == "btn btn-primary"){
+            console.log(btn)
+            window.location.href = `/contest/${btn}`
         }
+
     })
 
 })

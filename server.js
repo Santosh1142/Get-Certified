@@ -46,16 +46,16 @@ app.listen(port,function cb()
 
 
 
-var sampleData = [
-    { contestName : "CodeForces", description : "Div2(1452)", rangeOfExcellence : 1000 },
-    { contestName : "CodeChef", description : "Div1(June LT)", rangeOfExcellence : 2000 },
-    { contestName : "HackerRank", description : "Hiring", rangeOfExcellence : 3000 }
-];
+// var sampleData = [
+//     { contestname : "CodeForces", userid : 1234,userName: "Nikhil" },
+//     { contestname : "CodeChef", userid : 1143, userName : "Pranay" },
+//     { contestname : "HackerRank", userid : 7675, userName : "Kaushik" }
+// ];
 
-app.get('/api/sample',(req,res)=>{
-    res.json(sampleData)
-})
-app.post('/api/sample',(req,res)=>{
-    // console.log(req.body.data);
-    sampleData.push(req.body.data)
-})
+// app.get('/api/sample',(req,res)=>{
+//     res.json(sampleData)
+// })
+// app.post('/api/sample/:u',(req,res)=>{
+//     // console.log(req.body.data);
+//     sampleData.push(req.body.data)
+// })

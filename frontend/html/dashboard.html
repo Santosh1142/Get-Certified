@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="css/dashboard.css">
 </head>
-<body data-spy="scroll" data-target="#myScrollspy">
+<body data-spy="scroll" data-target="#myScrollspy" style="background-color: rgb(255, 253, 251);">
 
     <nav class="navbar navbar-default navbar-fixed-top" data-spy="affix" data-offset-top="205" style="padding:8px">
         <div class="container-fluid">
@@ -27,9 +27,8 @@
               </div>
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav navbar-right" >
-                    <li>Welcome</li>
-                    <li> &nbsp; User</li>
-                    &nbsp;
+                    <li id="userID"><a href="#profile">Welcome User</a></li>
+                    <li><a href="#logout">Logout</a></li>
                 </ul>
             </div>
         </div>
@@ -37,12 +36,12 @@
 
     <main>
         <div class="container">
-            
+
             <div>
                 <button id="addContest" class="btn btn-success btn-block" style="font-size: larger;white-space: normal;">Add Contest</button>
                 <br>
             </div>
-            <table id="contestTable" class="table table-hover"></table>
+            <table id="contestTable" class="table table-hover" style="background-color: white;"></table>
 
             <div class="modal fade" id="myModal" role="dialog">
                 <div class="modal-dialog">
@@ -54,13 +53,13 @@
                     </div>
                     <div class="modal-body">
                       <!-- <form action="" method="post"> -->
-                        <input id="contestName" name="contestName" type="text" class="form-control" placeholder="Contest Name" >
+                        <input id="contestname" name="contestname" type="text" class="form-control" placeholder="Contest Name" style="font-size: medium;">
                         <br>
-                        <input id="descp" name="descp" type="text" class="form-control" placeholder="Description" >
+                        <input id="descp" name="descp" type="text" class="form-control" placeholder="Description" style="font-size: medium;">
                         <br>
-                        <input id="range" name="range" type="number" class="form-control" placeholder="Range of Excellence" >
+                        <input id="organisation" name="organisation" type="text" class="form-control" placeholder="Organisation/College" style="font-size: medium;" >
                         <br>
-                        <button id="formSubmit" class="btn btn-primary btn-block">Submit</button>
+                        <button id="formSubmit" class="btn btn-primary btn-block" style="font-size: large;white-space: normal;">Submit</button>
                       <!-- </form> -->
                     </div>
                     
