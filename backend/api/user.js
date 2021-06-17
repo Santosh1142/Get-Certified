@@ -4,7 +4,8 @@ const bcrypt = require("bcrypt");
 const shortid = require("shortid");
 const jwt = require("jsonwebtoken");
 const sgMail = require("@sendgrid/mail");
-//const emailTemplates = require("");
+const emailTemplates = require("../email");
+const config=require("../config");
 
 
 var item= require('../itemlib');
@@ -17,7 +18,7 @@ router.get("/:userid", (req, res) => {
     query={_id:req.params.userid};
     populateJson = {
         path: "contests",
-        populate: { path: "contestId", populate: { path: "contestname" } }
+        populate: { path: "contestId"}
     }
     // item.getItemById(req.params.userid, User, (err, result) => {
     //     if (err)
@@ -28,7 +29,7 @@ router.get("/:userid", (req, res) => {
     //     }
     // })
     item.getItemByIdWithPopulate(req.params.userid,User,populateJson, (err,data)=>
-    { res.status(409).json({result:data});})
+    { res.status(201).json({result:data});})
    
 })
 
@@ -73,26 +74,26 @@ router.post("/signup", async(req, res, next) => {
                                 await result
                                     .save()
                                     .then((result1) => {
-                                        // const msg = {
-                                        //     to: result.email,
-                                        //     from: process.env.sendgridEmail,
-                                        //     subject: "Quizzie: Email Verification",
-                                        //     text: " ",
-                                        //     html: emailTemplates.VERIFY_EMAIL(result1),
-                                        // };
+                                        const msg = {
+                                            to: result.email,
+                                            from: config.sendgridEmail,
+                                            subject: "Get Certified: Email Verification",
+                                            text: " ",
+                                            html: emailTemplates.VERIFY_EMAIL(result1),
+                                        };
 
-                                        // sgMail
-                                        //     .send(msg)
-                                        //     .then((result) => {
-                                        //         console.log("Email sent");
-                                        //     })
-                                        //     .catch((err) => {
-                                        //         console.log(err.toString());
-                                        //         res.status(500).json({
-                                        //             // message: "something went wrong1",
-                                        //             error: err,
-                                        //         });
-                                        //     });
+                                        sgMail
+                                            .send(msg)
+                                            .then((result) => {
+                                                console.log("Email sent");
+                                            })
+                                            .catch((err) => {
+                                                console.log(err.toString());
+                                                res.status(500).json({
+                                                    // message: "something went wrong1",
+                                                    error: err,
+                                                });
+                                            });
                                         res.status(201).json({
                                             message: "user created",
                                             userDetails: {
@@ -121,9 +122,9 @@ router.post("/signup", async(req, res, next) => {
 });
 
 router.patch("/verifyEmail",async(req, res, next) => {
-    //console.log(req.body)
-    const { verificationKey } = req.body;
-    await User.findOne({ verificationKey })
+    //console.log(req.body.key)
+    const query={verificationKey:req.body.key};
+    await User.findOne(query)
         .then(async(user) => {
             if (Date.now() > user.verificationKeyExpires) {
                 res.status(401).json({
@@ -188,7 +189,7 @@ router.post("/login", async(req, res, next) => {
                             name: user[0].name,
                             mobileNumber: user[0].mobileNumber,
                         },
-                        process.env.jwtSecret, {
+                        config.jwtSecret, {
                             expiresIn: "1d",
                         }
                     );

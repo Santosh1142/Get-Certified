@@ -16,12 +16,12 @@ var Participants= require('../models/participants');
 
 router.post("/add/:contestid", async (req,res)=>
 {
-    //console.log(req.params.contestid);
+    console.log(req.params.contestid);
     var data= {
         _id: new mongoose.Types.ObjectId(),
         contestName : req.body.contestname,
-        contestId: req.params.contestid ,
-        //name: req.body.name,
+        ContestId: req.params.contestid ,
+        name:"coderi",
         passkey: shortid.generate(),
         email: req.body.email,
         rank: req.body.rank,
@@ -45,9 +45,9 @@ router.post('/delete/:id', async(req, res) => {
     })
 })
 
-router.post("/makecertified", async(req, res, next) => {
-    //console.log(req.body)
-    var query={passkey: req.body.passkey, contestId: req.body.contestId};
+router.patch("/makecertified", async(req, res, next) => {
+    console.log(req.body)
+    var query={passkey: req.body.passkey, ContestId: req.body.contestid};
 
     item.getItemByQuery(query, Participants, (err, data) => {
         if (err) {
@@ -61,7 +61,8 @@ router.post("/makecertified", async(req, res, next) => {
                     message: "Participant Doesnot Exist",
                 });
             } else {
-                if(data[0].certified==true) res.status(200).json({message : "Already Certified", response:result});
+                if(data[0].certified==true) res.status(200).json({message : "Already Certified", response:data});
+                else {
                 var update={certified:true, name:req.body.name};
                 item.updateItemField(query,update,Participants,(err, result)=>
                 {  if (err) {
@@ -69,15 +70,43 @@ router.post("/makecertified", async(req, res, next) => {
                     res.status(400).json({
                         error: err,
                     });}
-                    else res.status(200).json({message : "updated", response:result});
+                    else res.status(200).json({message : "updated"});
 
                 })
-
+                }
             }
         }
     })
 
 });
+
+router.get('/contest/:contestid', async(req, res) => {
+    console.log(req.params.contestid);
+    item.getItemByQuery({ ContestId: req.params.contestid }, Participants, (err, data) => {
+        if (err) {
+            res.status(400).json({
+                error: err,
+            });
+        } else {
+            res.status(200).json({ result: data })
+        }
+    })
+})
+
+router.get('/sendmail/:contestid', async(req, res) => {
+    console.log(req.params.userid);
+    item.getItemByQuery({ ContestId: req.params.userid }, Participants, (err, data) => {
+        if (err) {
+            res.status(400).json({
+                error: err,
+            });
+        } else {
+            res.status(200).json({ result: data })
+            //send mail code need to be written here-------
+
+        }
+    })
+})
 
 
 module.exports=router;
