@@ -10,6 +10,7 @@ const sgMail = require("@sendgrid/mail");
 var item= require('../itemlib');
 var User= require('../models/user');
 var Contest= require('../models/contest');
+const { request } = require('express');
 
 const router = express.Router();
 
@@ -156,6 +157,7 @@ router.patch("/verifyEmail",async(req, res, next) => {
 });
 
 router.post("/login", async(req, res, next) => {
+    console.log(req.body);
     item.getItemByQuery({ email: req.body.email }, User, (err, user) => {
         if (err) {
             res.status(500).json({
