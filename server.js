@@ -46,16 +46,17 @@ app.listen(port,function cb()
 
 
 
-// var sampleData = [
-//     { contestname : "CodeForces", userid : 1234,userName: "Nikhil" },
-//     { contestname : "CodeChef", userid : 1143, userName : "Pranay" },
-//     { contestname : "HackerRank", userid : 7675, userName : "Kaushik" }
-// ];
+var sampleData = [
+    { contestName : "Leetcode Long Challenge", ContestID : 1509,name: "Nikhil", passkey: 12131232313, email:"nikhil@gmail.com", rank: 1, certified:true },
+    { contestName : "Leetcode Long Challenge", ContestID : 1509, name : "John Wick", passkey: 1234525324, email:"wick@gmail.com", rank: 4, certified:false },
+    { contestName : "Leetcode Long Challenge", ContestID : 1509, name : "Pranay", passkey: 1234525452313, email:"pranay@gmail.com", rank: 2, certified:true },
+    { contestName : "Leetcode Long Challenge", ContestID : 1509, name : "Kaushik", passkey: 1213857352313, email:"kaushik@gmail.com", rank:3, certified:false }
+];
 
-// app.get('/api/sample',(req,res)=>{
-//     res.json(sampleData)
-// })
-// app.post('/api/sample/:u',(req,res)=>{
-//     // console.log(req.body.data);
-//     sampleData.push(req.body.data)
-// })
+app.get('/api/sample',(req,res)=>{
+    res.json(sampleData)
+})
+app.post('/api/sample/:u',(req,res)=>{
+    // console.log(req.body.data);
+    sampleData.push(req.body.data)
+})
