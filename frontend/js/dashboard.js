@@ -48,7 +48,7 @@ $(document).ready(()=>{
         
         console.log(contestData)
         $.ajax({
-            url : `api/contest/add/`+localStorage.userid,
+            url : `/api/contest/add/`+localStorage.userid,
             type : 'POST',
             data : contestData,
             success : (result)=>{

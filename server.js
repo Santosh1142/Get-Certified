@@ -39,7 +39,7 @@ mongoose.connection.on('connected', function()
 app.use(express.static(__dirname+'/frontend'));
 
 app.use('/api',apis);
-app.use('/ui',uis);
+app.use('/',uis);
 
 
 var port= process.env.PORT  || 3000;
