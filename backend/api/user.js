@@ -157,7 +157,7 @@ router.patch("/verifyEmail",async(req, res, next) => {
 });
 
 router.post("/login", async(req, res, next) => {
-    console.log(req.body);
+    //console.log(req.body);
     item.getItemByQuery({ email: req.body.email }, User, (err, user) => {
         if (err) {
             res.status(500).json({

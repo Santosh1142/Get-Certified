@@ -9,28 +9,38 @@ function login() {
 
     var emailid = String(document.getElementsByClassName("email")[0].value);
     var password = String(document.getElementsByClassName("password")[0].value);
-    //alert(emailid+password);
     var c = 2;
     if (emailid == "") {
-        document.getElementById("alertmsg").innerHTML = `Please Enter the email!`;
+        document.getElementById("alertmsg").innerHTML = ` <div class="alert alert-danger alert-dismissible">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>Sorry!</strong>Enter the Email
+      </div>`;
         c--;
-    } else document.getElementById("alertmsg").innerHTML = ``;
-    if (password == "") {
-        document.getElementById("alertmsg").innerHTML = `Please Enter the Password!`;
+    }
+
+
+   else if (password == "") {
+        document.getElementById("alertmsg").innerHTML = ` <div class="alert alert-danger alert-dismissible">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>Sorry!</strong>Enter the password
+      </div>`;
         c--;
     } else document.getElementById("alertmsg").innerHTML = ``;
 
     if (c == 2) {
         if (!IsEmail(emailid)) {
-            document.getElementById("alertmsg").innerHTML = `Invalid Email!`;
+            document.getElementById("alertmsg").innerHTML = ` <div class="alert alert-danger alert-dismissible">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Sorry!</strong>invalid Email
+          </div>`;
             c--;
-        } else document.getElementById("alertmsg").innerHTML = ``;
+        }
     }
 console.log(c);
     //ajax call to create an instance to the user in database
     //alert("sidfoisd");
     if (c == 2) {
-        alert("Ajax");
+        //alert("Ajax");
         $.ajax({
             type: "POST",
             url: "/api/user/login",
@@ -45,7 +55,7 @@ console.log(c);
                     localStorage.userid = resultData.userDetails.userId
                     localStorage.username = resultData.userDetails.name
                     localStorage.usertype = resultData.userDetails.userType
-                    //window.location.href = '/ui/dashboard';
+                    window.location.href = '/verify';
                 }
             }, //sucess
             error: function(error) {
@@ -54,7 +64,10 @@ console.log(c);
                         location.href = "/"
                     } else {
                         var x = document.getElementById("alertmsg");
-                        x.innerHTML = `<i class="fa fa-exclamation-circle" aria-hidden="true"></i> ${error.responseJSON.message}`
+                        x.innerHTML = ` <div class="alert alert-danger alert-dismissible">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <strong>Sorry!</strong>You are not registered  ${error.responseJSON.message}
+                      </div>`
                         x.className = "show";
                         setTimeout(function() { x.className = x.className.replace("show", ""); }, 3000);
                     }
