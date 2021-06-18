@@ -26,5 +26,9 @@ app.get("/dashboard", (req,res)=>
 app.get("/contest/:id", (req,res)=>
     {   var p=path.join(__dirname+'/../../frontend/html/contest.html')
         res.sendFile(p);})
+        
+ app.get("/verify", (req,res)=>
+{   var p=path.join(__dirname+'/../../frontend/html/verify.html')
+    res.sendFile(p);})
 
 module.exports=app;

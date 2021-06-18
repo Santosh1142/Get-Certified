@@ -17,8 +17,8 @@ function verify()
         }, 
         error: function(error) {
             console.log(error);
-                if (error.responseJSON.message == "Unauthorized access") {
-                    location.href = "/"
+                if (error.responseJSON.message == "Pass key expired") {
+                   //set toast click on resend
                 } else {
                     var x = document.getElementById("alertmsg");
                     x.innerHTML = ` <div class="alert alert-danger alert-dismissible">

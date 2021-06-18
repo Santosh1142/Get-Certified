@@ -55,7 +55,7 @@ console.log(c);
                     localStorage.userid = resultData.userDetails.userId
                     localStorage.username = resultData.userDetails.name
                     localStorage.usertype = resultData.userDetails.userType
-                    window.location.href = '/verify';
+                    window.location.href = '/dashboard';
                 }
             }, //sucess
             error: function(error) {

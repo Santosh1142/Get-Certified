@@ -124,7 +124,7 @@ router.post("/signup", async(req, res, next) => {
 
 router.patch("/verifyEmail",async(req, res, next) => {
     //console.log(req.body.key)
-    const query={verificationKey:req.body.key};
+    const query=req.body;
     await User.findOne(query)
         .then(async(user) => {
             if (Date.now() > user.verificationKeyExpires) {
