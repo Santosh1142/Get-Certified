@@ -49,7 +49,7 @@ router.get('/user/:userid', async(req, res) => {
 
 router.get('/details/:id', async(req, res) => {
     console.log(req.params.id);
-    item.getItemByQuery({ _id: req.params.id }, Contest, (err, data) => {
+    item.getItemByQuery({ email: req.params.id }, Contest, (err, data) => {
         if (err) {
             res.status(400).json({
                 error: err,

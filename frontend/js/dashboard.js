@@ -67,7 +67,7 @@ $(document).ready(()=>{
         var btnClass = $(e.target).attr('class')
         
         if(btnClass == "btn btn-primary"){
-            console.log(btn)
+            // console.log(btn)
             window.location.href = `/contest/${btn}`
         }
 
