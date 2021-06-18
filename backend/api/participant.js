@@ -6,7 +6,8 @@ const bcrypt = require("bcrypt");
 const shortid = require("shortid");
 const jwt = require("jsonwebtoken");
 const sgMail = require("@sendgrid/mail");
-//const emailTemplates = require("");
+const config=require("../config");
+const emailTemplates = require("../email");
 
 
 var item= require('../itemlib');
@@ -26,6 +27,7 @@ router.post("/add/:contestid", async (req,res)=>
         passkey: shortid.generate(),
         email: req.body.email,
         rank: req.body.rank,
+        eemailsent: false,
         certified: false}
     item.createitem(data,Participants, (err, data)=>
     {if (err) { res.status(400).json({ error: err,});
@@ -95,15 +97,54 @@ router.get('/contest/:contestid', async(req, res) => {
 })
 
 router.get('/sendmail/:contestid', async(req, res) => {
-    console.log(req.params.userid);
-    item.getItemByQuery({ ContestId: req.params.userid }, Participants, (err, data) => {
+    console.log(req.params.contestid);
+    item.getItemByQuery({ ContestId: req.params.contestid }, Participants, (err, data) => {
         if (err) {
             res.status(400).json({
                 error: err,
             });
         } else {
-            res.status(200).json({ result: data })
-            //send mail code need to be written here-------
+            console.log(data);
+            //res.status(200).json({ result: data })
+             //send mail code begins here-------
+
+            var l=data.length
+            for(var i=0;i<l;i++)
+            {   
+                participantdata={name:"Buddy",
+                                 passkey:data[i].passkey,
+                                 contestname:data[i].contestName,
+                                 URL:"http://localhost:3000/getcertified/"+data[i].ContestId
+                                }
+                const msg = {
+                    to: data[i].email,
+                    from: config.sendgridEmail,
+                    subject: "Get Certified:" + data[i].contestName ,
+                    text: " ",
+                    html: emailTemplates.CERTIFY_EMAIL(participantdata),
+                };
+
+                sgMail
+                    .send(msg)
+                    .then((result) => {
+                        console.log("Email sent to participant");
+                    })
+                    .catch((err) => {
+                        console.log(err.toString());
+                        res.status(500).json({
+                            // message: "something went wrong1",
+                            error: err,
+                        });
+                    });
+                    var query={passkey: data[i].passKey}
+                        Participants.updateOne(query, {emailsent: true}, (err,updateddata)=>
+                        {
+                         if(err) console.log("failed");
+                             else console.log("Updated the field $emailsent$");
+                                 
+                        });
+            }
+            // SENDMAIL Code ends here-----------------
 
         }
     })
