@@ -13,6 +13,11 @@ var uis= require('./backend/ui/alluiroutes.js');
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    next();
+});
+
 
 //DataBase Connection
 var Connection_String=config.dbURI;
@@ -28,16 +33,8 @@ mongoose.connection.on('connected', function()
 
 app.use(express.static(__dirname+'/frontend'));
 app.use('/api',apis);
-app.use('/ui',uis);
+app.use('/',uis);
 
-// app.get('/', function(req, res){
-//     res.sendFile(__dirname+ '/frontend/html/index.html'); 
-//  })
-app.get('/page', function(req, res){
-    var ext = path.extname(req.params.page);
-    if(ext=="")
-    res.sendFile(__dirname+ '/frontend/html/'+ req.params.page+".html"); 
-})
 
 var port= process.env.PORT  || 3000;
 app.listen(port,function cb()
