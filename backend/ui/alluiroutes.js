@@ -4,6 +4,7 @@ var path = require('path');
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(express.static(path.join(__dirname+'/../../frontend')));
 
 
 app.get("/", (req,res)=>
@@ -23,7 +24,7 @@ app.get("/dashboard", (req,res)=>
     {   var p=path.join(__dirname+'/../../frontend/html/dashboard.html')
         res.sendFile(p);})
 
-app.get("/contest/:id", (req,res)=>
+app.get("/contest", (req,res)=>
     {   var p=path.join(__dirname+'/../../frontend/html/contest.html')
         res.sendFile(p);})
         
