@@ -13,9 +13,9 @@ app.get("/access", (req,res)=>
 {   var p=path.join(__dirname+'/../../frontend/html/access.html')
     res.sendFile(p);})
 
-app.get("/index", (req,res)=>
-    {   var p=path.join(__dirname+'/../../frontend/html/index.html')
-        res.sendFile(p);})
+// app.get("/index", (req,res)=>
+//     {   var p=path.join(__dirname+'/../../frontend/html/index.html')
+//         res.sendFile(p);})
 
 app.get("/dashboard", (req,res)=>
     {   var p=path.join(__dirname+'/../../frontend/html/dashboard.html')
@@ -26,7 +26,7 @@ app.get("/contest/:id", (req,res)=>
         res.sendFile(p);})
 
         
-
+// app.get("/:constestid/:participantid")
 
 
 

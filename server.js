@@ -30,14 +30,13 @@ app.use(express.static(__dirname+'/frontend'));
 app.use('/api',apis);
 app.use('/ui',uis);
 
-app.get('/', function(req, res){
-    res.sendFile(__dirname+ '/frontend/html/index.html'); 
- })
+// app.get('/', function(req, res){
+//     res.sendFile(__dirname+ '/frontend/html/index.html'); 
+//  })
 app.get('/page', function(req, res){
     var ext = path.extname(req.params.page);
     if(ext=="")
-    res.sendFile(__dirname+ '/frontend/html/'+ req.params.page+".html");
-   
+    res.sendFile(__dirname+ '/frontend/html/'+ req.params.page+".html"); 
 })
 
 var port= process.env.PORT  || 3000;
