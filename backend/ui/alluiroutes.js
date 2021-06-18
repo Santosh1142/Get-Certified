@@ -36,6 +36,9 @@ app.get("/contest/:contestid", (req,res)=>
 {   var p=path.join(__dirname+'/../../frontend/html/verify.html')
     res.sendFile(p);})
 
+    app.get("/frgtpswrd", (req,res)=>
+{   var p=path.join(__dirname+'/../../frontend/html/frgtpswrd.html')
+    res.sendFile(p);})
 
 
 // app.get("/:contestid/:participantid", (req,res)=>

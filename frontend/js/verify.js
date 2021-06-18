@@ -12,7 +12,16 @@ function verify()
         success: function(resultData) {
             console.log(resultData);
             if (resultData.message == "User verified") {
-                window.location.href = '/access';
+                swal({
+                    title: "Hurray!",
+                    text: "Your Email is Verified Succesfuly :) ",
+                    type: "success",
+                    timer: 6000
+                    });
+                    setTimeout(function () {
+                        window.location.href = '/access';
+                     }, 2000);
+              
             }
         }, 
         error: function(error) {
