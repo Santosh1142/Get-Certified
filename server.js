@@ -14,9 +14,9 @@ var uis= require('./backend/ui/alluiroutes.js');
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.set('views',path.join(__dirname,'views'))
-app.set('view engine','ejs')
-app.use(express.static(__dirname + '/views'));
+// app.set('views',path.join(__dirname,'views'))
+// app.set('view engine','ejs')
+// app.use(express.static(__dirname + '/views'));
 
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
@@ -37,6 +37,7 @@ mongoose.connection.on('connected', function()
 // app.use("/api/auth",userauth);
 
 app.use(express.static(__dirname+'/frontend'));
+
 app.use('/api',apis);
 app.use('/',uis);
 
@@ -48,12 +49,12 @@ app.listen(port,function cb()
 
 var sampleData = [
     { contestName : "Leetcode Long Challenge", ContestID : 1509,name: "Nikhil", passkey: 12131232313, email:"nikhil@gmail.com", rank: 1, certified:true },
-    { contestName : "Leetcode Long Challenge", ContestID : 1509, name : "John Wick", passkey: 1234525324, email:"wick@gmail.com", rank: 4, certified:false },
-    { contestName : "Leetcode Long Challenge", ContestID : 1509, name : "Pranay", passkey: 1234525452313, email:"pranay@gmail.com", rank: 2, certified:true },
+    { contestName : "Leetcode Long Challenge", ContestID : 1509, name : "John Wick", passkey: 1234525324, email:"123@gmail.com", rank: 4, certified:false },
+    { contestName : "Leetcode Long Challenge", ContestID : 1509, name : "Pranay", passkey: 1234525452313, email:"1234@gmail.com", rank: 2, certified:true },
     { contestName : "Leetcode Long Challenge", ContestID : 1509, name : "Kaushik", passkey: 1213857352313, email:"kaushik@gmail.com", rank:3, certified:false }
 ];
 
-app.get('/api/sample',(req,res)=>{
+app.get('/contest/api/sample',(req,res)=>{
     res.json(sampleData)
 })
 app.post('/api/sample/:u',(req,res)=>{
