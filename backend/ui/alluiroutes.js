@@ -27,4 +27,10 @@ app.get("/contest/:id", (req,res)=>
     {   var p=path.join(__dirname+'/../../frontend/html/contest.html')
         res.sendFile(p);})
 
+
+app.get("/:contestid/:participantid",(req,res)=>{
+    res.render('certificate.ejs')
+})
+
+
 module.exports=app;
