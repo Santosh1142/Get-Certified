@@ -60,6 +60,7 @@ section .container .user .formBx {
   display: flex;
   justify-content: center;
   align-items: center;
+  vertical-align: middle;
   padding: 40px;
   transition: 0.5s;
 }

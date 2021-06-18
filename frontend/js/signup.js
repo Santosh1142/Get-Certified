@@ -12,6 +12,12 @@ function signup() {
         if (!regex.test(phoneno)) return false;
         else return true;
     }
+    function Ispassword(password)
+    {
+       var regex=/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/g;
+       if(!regex.test(password))return false;
+       else return true;
+    }
 console.log("Hello");
     var emailid = String(document.getElementsByClassName("emailid")[0].value);
     var phoneno = String(document.getElementsByClassName("phone")[0].value);
@@ -20,7 +26,7 @@ console.log("Hello");
     var name = String(document.getElementsByClassName("name")[0].value);
     
     //alert(emailid+ " " +phoneno+password+" " +conformpassword+" " +name);
-    var c = 4;
+    var c = 6;
     if (name == "") {
         
         document.getElementById("alert").innerHTML = `<div class="alert alert-danger alert-dismissible">
@@ -38,11 +44,11 @@ console.log("Hello");
     } 
     else if(password!=conformpassword)
     {
-        alert("Hello");
         document.getElementById("alert").innerHTML = `<div class="alert alert-danger alert-dismissible">
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
         <strong>Sorry!</strong>Passwords doesnot match
       </div>`;
+      c--;
     }
     else if (password == "") {
         document.getElementById("alert").innerHTML = `<div class="alert alert-danger alert-dismissible">
@@ -51,8 +57,17 @@ console.log("Hello");
       </div>`;
         c--;
     }
+    else if(password.length<8)
+    {
+        document.getElementById("alert").innerHTML = `<div class="alert alert-danger alert-dismissible">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>Sorry!</strong>Password should contain atleast 8 charectes
+      </div>`;
+      c--;   
+    }
 
-    if (c == 4) {
+    if (c == 6) {
+
        // alert("Hello");
         if (!IsEmail(emailid)) {
             document.getElementById("alert").innerHTML = `<div class="alert alert-danger alert-dismissible">
@@ -68,10 +83,20 @@ console.log("Hello");
           </div>`;
             c--;
         } 
+        else if (!Ispassword(password)) {
+            //alert("Hello");
+            swal({
+                title: "Sorry!",
+                text: "password should contain Minimum eight characters, at least one uppercase letter, one lowercase letter and one number",
+                type: "warning",
+                timer: 6000
+                });
+            c--;
+        } 
     }
 
     //ajax call to create an instance to the user in database
-    if (c == 4) {
+    if (c == 6) {
 
         $.ajax({
             type: "POST",
