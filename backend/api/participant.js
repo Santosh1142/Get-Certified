@@ -110,7 +110,5 @@ router.get('/sendmail/:contestid', async(req, res) => {
 })
 
 
-// router.get()
-
 
 module.exports=router;
