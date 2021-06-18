@@ -18,7 +18,9 @@ function fillTable(){
             data = data.result;
             var t= thead;
             for(let i=0;i<data.length;i++){
-                t += "<tr><td>"+data[i].contestname+"</td><td>"+data[i].creationtime+"</td><td>"+data[i].userName+"</td><td><button id="+data[i].userId+" class='btn btn-primary'>Add Participants Data</button></td></tr>";
+                var date = new Date(data[i].creationtime);
+                date=date.toLocaleDateString();
+                t += "<tr><td>"+data[i].contestname+"</td><td>"+date+"</td><td>"+data[i].userName+"</td><td><button id="+data[i].userId+" class='btn btn-primary'>Add Participants Data</button></td></tr>";
             }
             $("#contestTable").html(t);
         }
