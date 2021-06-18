@@ -3,21 +3,28 @@ var app = express();
 var mongoose= require('mongoose');
 //const bodyParser = require("body-parser");
 var passport = require('passport');
+const sgMail = require("@sendgrid/mail");
+const config = require("./backend/config");
+sgMail.setApiKey(config.SendgridAPIKey);
 var path = require('path');
 var apis= require('./backend/api/allapiroutes.js');
+var uis= require('./backend/ui/alluiroutes.js');
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    next();
+});
+
 
 //DataBase Connection
-var Connection_String="mongodb+srv://nikhil_mohan:uDiD2RTJNQMh3ghL@cluster0.ooac4.mongodb.net/GetCertified?retryWrites=true&w=majority";
+var Connection_String=config.dbURI;
 var options={useUnifiedTopology: true, useNewUrlParser: true };
-mongoose.connect(Connection_String,options,function cb(){
-    console.log("GetCertified DataBase");
-});
+mongoose.connect(Connection_String,options);
 mongoose.connection.on('connected', function()
-{console.log("Database Connected");})
+{ console.log("GetCertified DataBase Connected");})
 
 
 
@@ -26,18 +33,19 @@ mongoose.connection.on('connected', function()
 
 app.use(express.static(__dirname+'/frontend'));
 app.use('/api',apis);
+app.use('/',uis);
 
-app.get('/', function(req, res){
-    res.sendFile(__dirname+ '/frontend/html/index.html'); 
- })
-app.get('/:page', function(req, res){
-    var ext = path.extname(req.params.page);
-    if(ext=="")
-    res.sendFile(__dirname+ '/frontend/html/'+ req.params.page+".html");
-   
-})
 
 var port= process.env.PORT  || 3000;
 app.listen(port,function cb()
 {console.log("http://localhost:"+port)
 });
+
+app.use((error, req, res, next) => {
+    res.status(error.status || 500);
+    res.json({
+        error: {
+            message: error.message,
+        },
+    });
+  });

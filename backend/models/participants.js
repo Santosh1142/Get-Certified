@@ -6,7 +6,7 @@ const participantSchema = mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
     contestName : { type: String, required: true },
     ContestId: { type: mongoose.Schema.Types.ObjectID, ref: "Contest" },
-    name: { type: String, required: true },
+    name: { type: String},
     email: {type: String,
             lowercase: true,
             match: /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/,
