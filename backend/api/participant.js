@@ -13,6 +13,7 @@ var item= require('../itemlib');
 var User= require('../models/user');
 var Contest= require('../models/contest');
 var Participants= require('../models/participants');
+var templates = require('../certificateTemplate')
 
 router.post("/add/:contestid", async (req,res)=>
 {
@@ -107,6 +108,9 @@ router.get('/sendmail/:contestid', async(req, res) => {
         }
     })
 })
+
+
+// router.get()
 
 
 module.exports=router;

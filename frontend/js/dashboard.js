@@ -48,7 +48,7 @@ $(document).ready(()=>{
         
         console.log(contestData)
         $.ajax({
-            url : `api/contest/add/`+localStorage.userid,
+            url : `/api/contest/add/`+localStorage.userid,
             type : 'POST',
             data : contestData,
             success : (result)=>{
@@ -67,7 +67,7 @@ $(document).ready(()=>{
         var btnClass = $(e.target).attr('class')
         
         if(btnClass == "btn btn-primary"){
-            console.log(btn)
+            // console.log(btn)
             window.location.href = `/contest/${btn}`
         }
 
