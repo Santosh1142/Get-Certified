@@ -27,9 +27,23 @@ app.get("/dashboard", (req,res)=>
 app.get("/contest", (req,res)=>
     {   var p=path.join(__dirname+'/../../frontend/html/contest.html')
         res.sendFile(p);})
-        
+  
+// app.get("/contest/:id", (req,res)=>{
+//     res.render('contest.ejs', {'title':'Contest Participants'});
+// })
+
  app.get("/verify", (req,res)=>
 {   var p=path.join(__dirname+'/../../frontend/html/verify.html')
     res.sendFile(p);})
+
+
+
+app.get("/:contestid/:participantid", (req,res)=>
+{   var p=path.join(__dirname+'/../../frontend/html/certificate.html')
+    res.sendFile(p);})
+// app.get("/:contestid/:participantid",(req,res)=>{
+//     res.render('certificate.ejs')
+// })
+
 
 module.exports=app;
