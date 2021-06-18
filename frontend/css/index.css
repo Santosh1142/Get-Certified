@@ -236,10 +236,10 @@ section{
 }
 
 .btn-default-new{
-    background: #c34d34;
+    background: #4d4949;
     border-radius: 30px;
-    border: solid 3px #c34d34;
-    color: #ffffff;
+    
+    color:rgb(240, 236, 236);
     font-size: 18px;
     text-transform: capitalize;
     font-family: 'Roboto', sans-serif;
@@ -254,8 +254,8 @@ section{
 
 .btn-default-new:hover, .btn-default-new:focus{
     background: #fff;
-    color: #c34d34;
-    border-color: #c34d34;
+   
+    
 }
 /**** ABOUT END ****/
 /**** SERVICE ****/

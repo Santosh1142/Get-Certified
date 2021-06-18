@@ -14,9 +14,15 @@ function signup() {
     }
     function Ispassword(password)
     {
-       var regex=/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/g;
-       if(!regex.test(password))return false;
-       else return true;
+        var paswd =  /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,15}$/;
+    if(password.match(paswd)) 
+    { 
+    return true;
+    }
+    else
+    { 
+    return false;
+    }
     }
 console.log("Hello");
     var emailid = String(document.getElementsByClassName("emailid")[0].value);
