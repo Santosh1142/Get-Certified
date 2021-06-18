@@ -41,9 +41,9 @@ app.get("/contest/:contestid", (req,res)=>
     res.sendFile(p);})
 
 
-// app.get("/:contestid/:participantid", (req,res)=>
-// {   var p=path.join(__dirname+'/../../frontend/html/certificate.html')
-//     res.sendFile(p);})
+app.get("/:contestid/:participantid", (req,res)=>
+{   var p=path.join(__dirname+'/../../frontend/html/certificate.html')
+    res.sendFile(p);})
 // app.get("/:contestid/:participantid",(req,res)=>{
 //     res.render('certificate.ejs')
 // })

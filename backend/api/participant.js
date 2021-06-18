@@ -109,8 +109,23 @@ router.get('/sendmail/:contestid', async(req, res) => {
     })
 })
 
+router.get('/getCertificate',(req,res)=>{
+    res.json(templates)
+})
 
-// router.get()
+router.get('/:participantID', async(req, res) => {
+    console.log(req.params.participantID);
+    item.getItemByQuery({ _id: req.params.participantID }, Participants, (err, data) => {
+        if (err) {
+            res.status(400).json({
+                error: err,
+            });
+        } else {
+            console.log(data)
+            res.status(200).json({ result: data })
+        }
+    })
+})
 
 
 module.exports=router;
