@@ -36,7 +36,7 @@ app.use('/api',apis);
 app.use('/',uis);
 
 
-var port= process.env.PORT  || 3999;
+var port= process.env.PORT  || 3000;
 app.listen(port,function cb()
 {console.log("http://localhost:"+port)
 });
