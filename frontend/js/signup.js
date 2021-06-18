@@ -12,39 +12,67 @@ function signup() {
         if (!regex.test(phoneno)) return false;
         else return true;
     }
-
-    var emailid = String(document.getElementsByClassName("email")[0].value);
+console.log("Hello");
+    var emailid = String(document.getElementsByClassName("emailid")[0].value);
     var phoneno = String(document.getElementsByClassName("phone")[0].value);
-    var password = String(document.getElementsByClassName("password")[0].value);
+    var password = String(document.getElementsByClassName("pswrd")[0].value);
+    var conformpassword= String(document.getElementsByClassName("cnfrmpswrd")[0].value);
     var name = String(document.getElementsByClassName("name")[0].value);
-    //alert(String(window.location.href));
+    
+    //alert(emailid+ " " +phoneno+password+" " +conformpassword+" " +name);
     var c = 4;
     if (name == "") {
-        document.getElementById("namealert").innerHTML = `Please Enter the name!`;
+        
+        document.getElementById("alert").innerHTML = `<div class="alert alert-danger alert-dismissible">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>Sorry!</strong>Please Enter your name 
+      </div>`;
         c--;
-    } else document.getElementById("namealert").innerHTML = ``;
-    if (emailid == "") {
-        document.getElementById("emailalert").innerHTML = `Please Enter the email!`;
+    } 
+    else if (emailid == "") {
+        document.getElementById("alert").innerHTML = `<div class="alert alert-danger alert-dismissible">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>Sorry!</strong>Please Enter the Email
+      </div>`;
         c--;
-    } else document.getElementById("emailalert").innerHTML = ``;
-    if (password == "") {
-        document.getElementById("passwordalert").innerHTML = `Please Enter the Password!`;
+    } 
+    else if(password!=conformpassword)
+    {
+        alert("Hello");
+        document.getElementById("alert").innerHTML = `<div class="alert alert-danger alert-dismissible">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>Sorry!</strong>Passwords doesnot match
+      </div>`;
+    }
+    else if (password == "") {
+        document.getElementById("alert").innerHTML = `<div class="alert alert-danger alert-dismissible">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>Sorry!</strong>Please Enter the password
+      </div>`;
         c--;
-    } else document.getElementById("passwordalert").innerHTML = ``;
+    }
 
     if (c == 4) {
+       // alert("Hello");
         if (!IsEmail(emailid)) {
-            document.getElementById("emailalert").innerHTML = `Invalid Email!`;
+            document.getElementById("alert").innerHTML = `<div class="alert alert-danger alert-dismissible">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Sorry!</strong>Invalid Email
+          </div>`;
             c--;
-        } else document.getElementById("emailalert").innerHTML = ``;
-        if (!IsPhoneno(phoneno) && phoneno != "") {
-            document.getElementById("phonealert").innerHTML = `Invalid PhoneNo.`;
+        } 
+        else if (!IsPhoneno(phoneno) && phoneno != "") {
+            document.getElementById("alert").innerHTML = `<div class="alert alert-danger alert-dismissible">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Sorry!</strong>Invalid phone No
+          </div>`;
             c--;
-        } else document.getElementById("phonealert").innerHTML = ``;
+        } 
     }
 
     //ajax call to create an instance to the user in database
     if (c == 4) {
+
         $.ajax({
             type: "POST",
             url: "/api/user/signup",
@@ -57,23 +85,28 @@ function signup() {
             },
             success: function(resultData) {
                 if (resultData.message == "Email already exists")
-                    document.getElementById("emailalert").innerHTML = `This email already has an account`;
+                    document.getElementById("alert").innerHTML = `<div class="alert alert-danger alert-dismissible">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong>Sorry!</strong>Enter the Email
+                  </div>`;
                 if (resultData.message == "user created") {
-                    window.location.href = '/ui/verify/user';
+                    window.location.href = '/verify';
                 }
             }, //sucess
             error: function(resultData) {
                     if (resultData.responseJSON.message == "Unauthorized access") {
                         location.href = "/"
                     } else {
-                        var x = document.getElementById("snackbar");
+                        var x = document.getElementById("alert");
 
-                        x.innerHTML = `<i class="fa fa-exclamation-circle" aria-hidden="true"></i> ${resultData.responseJSON.message}`
+                        x.innerHTML = `<div class="alert alert-danger alert-dismissible">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <strong>Sorry!</strong>Enter the Email
+                       ${resultData.responseJSON.message}</div>`
                         x.className = "show";
                         setTimeout(function() { x.className = x.className.replace("show", ""); }, 3000);
                     }
                 } //error
         });
     }
-
 } //End of signup function

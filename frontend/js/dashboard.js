@@ -10,8 +10,9 @@ var thead = "<tr><th>Contest Name</th><th>Created On</th><th>Username</th><th></
 // }
 
 function fillTable(){
+   // console.log(localStorage.userid);
     $.ajax({
-        url : `api/contest/user/60cb03543e33191288793b69`,
+        url : `api/contest/user/`+localStorage.userid,
         type : 'GET',
         success : (data)=>{
             console.log(data)
@@ -47,7 +48,7 @@ $(document).ready(()=>{
         
         console.log(contestData)
         $.ajax({
-            url : `api/contest/add/60cb03543e33191288793b69`,
+            url : `api/contest/add/`+localStorage.userid,
             type : 'POST',
             data : contestData,
             success : (result)=>{
