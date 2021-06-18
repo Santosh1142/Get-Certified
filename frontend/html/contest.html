@@ -27,7 +27,7 @@
               </div>
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav navbar-right" >
-                    <li id="userID"><a href="#profile">Welcome User</a></li>
+                    <li><a href="#profile" id="userID"></a></li>
                     <li><a href="#logout">Logout</a></li>
                 </ul>
             </div>
@@ -35,12 +35,30 @@
     </nav>
 
     <main>
+
+
         <div class="container">
-            <h2 id="contestName"></h2>
-            <h2 id="contestID"></h2>
-            <br><br>
-            <table id="participantsTable" class="table table-hover"></table>
+            <div class="row">
+                <div class="col-sm-8">
+                    <table id="participantsTable" class="table table-hover"></table>
+                </div>
+                <div id="stats" class="col-sm-4">
+                    <br>
+                    <div class="row"> <h2 id="contestName"></h2> </div>
+                    <div class="row"> <h2 id="contestID"></h2> </div>
+                    <div class="row"> <h2 id="pCount"></h2> </div>
+                    <div class="row"> <h2 id="certifiedCount"></h2> </div>
+                    <div class="row"> <h2 id="excellence"></h2> </div>
+                    <br><br>
+                    <div class="row"> <h2>Template Model: </h2> </div>
+                    <div class="row"> <img class="templateModel" id="simple" src="../img/simple.jpg" alt="Simple" > </div>
+                    <div class="row"> <img class="templateModel" id="simpleTag" src="../img/simpleTag.jpg" alt="Simple" > </div>
+                    <br>
+                </div>
+            </div>
         </div>
+
+
     </main>
     
 

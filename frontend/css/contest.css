@@ -5,3 +5,34 @@ main{
 td,th{
     text-align: center;
 }
+
+h2{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 10px;
+}
+
+.templateModel{
+    width: 75%;
+    height: 185px;
+    transition: transform .2s;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid rgb(184, 184, 184);
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+.templateModel:hover{
+    transform: scale(1.5);
+}
+
+#stats{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.10);
+    border: 0.5px solid rgb(230, 229, 229);
+    border-radius: 15px;
+}
+button{
+    box-shadow: 0 3px 7px 0 rgba(0, 0, 0, 0.1), 0 5px 19px 0 rgba(0, 0, 0, 0.10);
+}
