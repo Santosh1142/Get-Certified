@@ -1,8 +1,9 @@
 
 var thead = "<tr><th>SNo.</th><th>Email</th><th>Contest Rank</th><th>State</th></tr>"
+var a = "60ca0bcc23fd422ef0a32dea"
 
 function displayTable(){
-    var a = "60ca0bcc23fd422ef0a32dea"
+    
     $.ajax({
         url:`/api/participant/contest/${a}`,
         type:'GET',
@@ -36,8 +37,16 @@ $(document).ready(()=>{
         
         if(btnClass == "btn btn-success" || btnClass == "btn btn-danger"){
             console.log(btn)
-            console.log(localStorage.currentList)
-            // window.location.href = `/1509/${btn}`
+
+            // var participantsData = JSON.parse(localStorage.currentList)
+            // for(let i=0;i<participantsData.length;i++){
+            //     if(participantsData[i].email == btn){
+            //         localStorage.currentParticipant = JSON.stringify(participantsData[i]);
+            //         break;
+            //     }
+            // }
+
+            window.location.href = `/${a}/${btn}`
             // $.ajax({
             //     url : `api/participant/details/${btn}`,
             //     type : 'GET',
