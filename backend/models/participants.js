@@ -13,6 +13,7 @@ const participantSchema = mongoose.Schema({
            },
     rank: { type: Number },
     certified: { type: Boolean, default: false },
+    emailsent: { type: Boolean, default: false },
     passkey: {type:String,required: true },
     isDeleted: {type:String, default: false }
 });
