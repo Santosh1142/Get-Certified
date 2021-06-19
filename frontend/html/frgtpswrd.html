@@ -27,16 +27,42 @@
                   <h2>Password updation</h2>
                   <div id="alertmsg">
                   </div>
+                  <div id="div0">
                   <input type="text" name="email" placeholder="Email" class="email"/>
-                  <input type="password" name="NewPassword" placeholder="NewPassword" class="NewPassword"/>
-                  <input type="submit" name="" value="Submit" onclick="update()"/>
+                  <button style="background-color: #677eff;border: none ; color: white;height: 1cm; padding-left: 1cm;padding-right: 1cm;" onclick="sendkey()">click here to get verification key</button>
+                  </div>
+                <div id="div1">
+                    <input type="password" name="Passkey" placeholder="Passkey" class="passkey" id="passkey"/>
+                  <input type="submit" name="" value="Submit" onclick="verify()"/>
+                </div>
                   <p class="signup">
                   </p>
                </div>
               </div>
             </div>
+            <div class="user signupBx">
+              <div class="formBx">
+                <div class="form">
+                  <h2>Change password</h2>
+                  <div id="alert">
+                  </div>
+                  <input type="password" name="pswrd" placeholder="New Password" class="newpswrd"/>
+                  <input type="password" name="cnfrmpswrd" placeholder="Confirm Password" class="cnfrmpswrd" /> 
+                  <input type="submit" name="" value="Update" onclick="update()"/>
+                  <p class="signup">
+                    Already have an account ?
+                    <a href="#" onclick="toggleForm();">Sign in.</a>
+                  </p>
+              </div>
+              </div>
+              <div class="imgBx"><img src="https://i.pinimg.com/originals/b9/49/c8/b949c86a570df07a7440abe39405834c.gif" alt="" /></div>
+            </div>
+          </div>
+          </section>
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
              <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>  
-            <script src="/js/frgtpswrd.js.js"></script>
+            <script src="/js/frgtpswrd.js"></script>
+            <script src="/js/access.js"></script>
+
       </body>
 </html>
