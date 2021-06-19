@@ -29,10 +29,11 @@ h2{
 }
 
 #stats{
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.10);
+    box-shadow: 0 3px 7px 0 rgba(14, 14, 14, 0.1), 0 5px 19px 0 rgba(12, 12, 12, 0.1);
     border: 0.5px solid rgb(230, 229, 229);
     border-radius: 15px;
+    background-color: white;
 }
 button{
-    box-shadow: 0 3px 7px 0 rgba(0, 0, 0, 0.1), 0 5px 19px 0 rgba(0, 0, 0, 0.10);
+    box-shadow: 0 3px 7px 0 rgba(14, 14, 14, 0.1), 0 5px 19px 0 rgba(12, 12, 12, 0.1);
 }

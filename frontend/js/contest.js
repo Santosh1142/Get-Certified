@@ -59,4 +59,17 @@ $(document).ready(()=>{
     })
 
 
+    $(this).click((e)=>{
+        // console.log("simpleTwo");
+        var tID = $(e.target).attr('id')
+        var tClass = $(e.target).attr('class')
+        if(tClass == "templateModel"){
+            localStorage.templateModel = tID;
+            toastr.options.closeButton = true;
+            toastr.success(tID+" Template selected")
+            // toastr.clear()
+        }
+    })
+
+
 })
