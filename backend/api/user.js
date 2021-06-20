@@ -33,6 +33,56 @@ router.get("/:userid", (req, res) => {
     { res.status(201).json({result:data});})
    
 })
+router.post("/resendVerificationEmail", async(req, res, next) => {
+    const { email } = req.body;
+    console.log(req.body);
+    const user = await User.findOne({ email });
+    if (user) {
+         console.log(user);
+        if (user.verificationKey == null) {
+            return res.status(200).json({ message: "already verified" })
+        }
+        user.verificationKey = shortid.generate();
+        user.verificationKeyExpires = new Date().getTime() + 20 * 60 * 1000;
+        await user
+            .save()
+            .then((result) => {
+                const msg = {
+                    to: email,
+                    from: config.sendgridEmail,
+                    subject: "Get Certified: Email Verification",
+                    text: " ",
+                    html: emailTemplates.VERIFY_EMAIL(result),
+                };
+
+                sgMail
+                    .send(msg)
+                    .then((result) => {
+                        res.status(200).json({
+                            message: "Password reset key sent to email",
+                        });
+                    })
+                    .catch((err) => {
+                        res.status(500).json({
+                            // message: "something went wrong1",
+                            error: err.toString(),
+                        });
+                    });
+            })
+            .catch((err) => {
+                res.status(400).json({
+                    message: "Some error occurred",
+                    error: err.toString(),
+                });
+            });
+    } else {
+        return res.status(400).json({
+            message: "email not found",
+
+        })
+    }
+});
+
 
 router.post("/signup", async(req, res, next) => {
     console.log(req.body)
@@ -222,6 +272,110 @@ router.post("/login", async(req, res, next) => {
             });
         }
     });
+});
+
+router.post("/forgot", (req, res) => {
+    
+    var email = req.body.email;
+    User.findOne({ email: email }, (err, userData) => {
+        if (!err && userData != null) {
+            userData.passResetKey = shortid.generate();
+            userData.passKeyExpires = new Date().getTime() + 20 * 60 * 1000; // pass reset key only valid for 20 minutes
+            userData.save().then((result) => {
+                if (!err) {
+                    const msg = {
+                        to: email,
+                        from: config.sendgridEmail,
+                        subject: "Get Certified: Password Reset Request",
+                        text: " ",
+                        html: emailTemplates.FORGOT_PASSWORD(result),
+                    };
+                    sgMail
+                        .send(msg)
+                        .then((result) => {
+                            res.status(200).json({
+                                message: "Password reset key sent to email",
+                            });
+                        })
+                        .catch((err) => {
+                            console.log(err.toString());
+                            res.status(500).json({
+                                // message: "something went wrong1",
+                                error: err,
+                            });
+                        });
+                }
+            });
+        } else {
+            res.status(401).json({
+                message: "Your Email Is Incorrect",
+            });
+        }
+    });
+});
+
+router.post("/resetpass", async(req, res) => {
+    /*if (!req.body.captcha) {
+        return res.status(400).json({
+            message: "No recaptcha token",
+        });
+    }
+    var flag = 0; 
+    request(req.verifyURL, (err, response, body) => {
+        body = JSON.parse(body);
+        console.log(err)
+        console.log(body)
+        try {
+            if (!body.success || body.score < 0.4) {
+                flag = 1
+                return res.status(401).json({
+                    message: "Something went wrong",
+                });
+            }
+            if (err) {
+                return res.status(401).json({
+                    message: err.toString(),
+                });
+            }
+        } catch (err) {
+            return res.status(500).json({
+                error: err
+            })
+        }
+    });
+    console.log(flag) */
+    let resetKey = req.body.resetKey;
+    let newPassword = req.body.newPassword;
+
+    await User.findOne({ passResetKey: resetKey })
+        .then(async(result) => {
+            if (Date.now() > result.passKeyExpires) {
+                res.status(401).json({
+                    message: "Pass key expired",
+                });
+            }
+            result.password = bcrypt.hashSync(newPassword, 10);
+            result.passResetKey = null;
+            result.passKeyExpires = null;
+            await result
+                .save()
+                .then((result1) => {
+                    res.status(200).json({
+                        message: "Password updated",
+                    });
+                })
+                .catch((err) => {
+                    res.status(403).json({
+                        message: "Unusual error",
+                        err: err.toString(),
+                    });
+                });
+        })
+        .catch((err) => {
+            res.status(400).json({
+                message: "Invalid pass key",
+            });
+        });
 });
 
 module.exports=router;

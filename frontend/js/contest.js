@@ -1,11 +1,11 @@
 
 var thead = "<tr><th>SNo.</th><th>Email</th><th>Contest Rank</th><th>State</th></tr>"
-var a = "60ca0bcc23fd422ef0a32dea"
+var contestid = location.href.split('/').slice(-1)[0];
 
 function displayTable(){
     
     $.ajax({
-        url:`/api/participant/contest/${a}`,
+        url:`/api/participant/contest/${contestid}`,
         type:'GET',
         success : (data)=>{
             console.log(data)
@@ -53,7 +53,7 @@ $(document).ready(()=>{
             //     }
             // }
 
-            window.location.href = `/${a}/${btn}`
+            window.location.href = `/${contestid}/${btn}`
         }
 
     })
@@ -73,3 +73,17 @@ $(document).ready(()=>{
 
 
 })
+
+//Kaushik mowa, this the ajax for sending mails to all the participants
+// add a button and invoke this function  on click
+
+// function test()
+// {
+//     $.ajax({
+//         url:`/api/participant/sendmail/${contestid}`,
+//         type:'GET',
+//         success : (data)=>{
+//             console.log(data)
+//         }
+//     })
+// }

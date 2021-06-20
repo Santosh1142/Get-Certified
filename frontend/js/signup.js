@@ -13,18 +13,12 @@ function signup() {
         else return true;
     }
     function Ispassword(password)
-    {
-        var paswd =  /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,15}$/;
-    if(password.match(paswd)) 
-    { 
-    return true;
+    { var paswd =  /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,15}$/;
+      if(password.match(paswd))  return true;
+      else return false;
     }
-    else
-    { 
-    return false;
-    }
-    }
-console.log("Hello");
+    
+    //console.log("Hello");
     var emailid = String(document.getElementsByClassName("emailid")[0].value);
     var phoneno = String(document.getElementsByClassName("phone")[0].value);
     var password = String(document.getElementsByClassName("pswrd")[0].value);
