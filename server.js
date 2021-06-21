@@ -4,6 +4,7 @@ var mongoose= require('mongoose');
 //const bodyParser = require("body-parser");
 var passport = require('passport');
 const sgMail = require("@sendgrid/mail");
+var expressFileUpload = require('express-fileupload')
 const config = require("./backend/config");
 sgMail.setApiKey(config.SendgridAPIKey);
 var path = require('path');
@@ -13,6 +14,8 @@ var uis= require('./backend/ui/alluiroutes.js');
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+app.use(expressFileUpload())
 
 // app.set('views',path.join(__dirname,'views'))
 // app.set('view engine','ejs')
