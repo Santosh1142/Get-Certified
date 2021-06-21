@@ -10,17 +10,21 @@ function displayTable(){
         success : (data)=>{
             console.log(data)
             data = data.result;
-            // localStorage.currentList = JSON.stringify(data);
             var t= thead;
+            var pCount = data.length, certifiedCount = 0;
             for(let i=0;i<data.length;i++){
                 var certifyClass = "btn btn-danger", certifyState = "Certificate";
-                if(data[i].certified === true){ certifyClass = "btn btn-success"; }
+                if(data[i].certified === true){ certifyClass = "btn btn-success"; certifiedCount+=1 }
                 
                 t += "<tr><td>"+(i+1)+"</td><td>"+data[i].email+"</td><td>"+data[i].rank+"</td><td><button id="+data[i]._id+" class='"+certifyClass+"'>"+certifyState+"</button></td></tr>";
             }
-            $("#contestName").html("Participants of "+data[0].contestName)
-            $("#contestID").html("Contest ID : "+data[0].ContestId)
+            console.log(data[0].contestName)
+            $("#contestName").html("Contest: "+(data[0].contestName))
+            // $("#contestID").html("C-ID: "+(data[0].ContestId))
+            $("#excellence").html("Range of Excellence: 70%")
+            $("#pCount").html("Total Participants: "+pCount); $("#certifiedCount").html("Certified Praticipants: "+certifiedCount);
             $("#participantsTable").html(t);
+            $("#stats").show()
         }
     })
 
@@ -28,6 +32,8 @@ function displayTable(){
 
 $(document).ready(()=>{
 
+    $("#stats").hide();
+    $("#userID").html("Welcome "+localStorage.username)
 
     displayTable();
 
@@ -47,9 +53,22 @@ $(document).ready(()=>{
             //     }
             // }
 
-            window.location.href = `/${a}/${btn}`
+            window.location.href = `/${contestid}/${btn}`
         }
 
+    })
+
+
+    $(this).click((e)=>{
+        // console.log("simpleTwo");
+        var tID = $(e.target).attr('id')
+        var tClass = $(e.target).attr('class')
+        if(tClass == "templateModel"){
+            localStorage.templateModel = tID;
+            toastr.options.closeButton = true;
+            toastr.success(tID+" Template selected")
+            // toastr.clear()
+        }
     })
 
 

@@ -27,7 +27,7 @@
               </div>
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav navbar-right" >
-                    <li id="userID"><a href="#profile">Welcome User</a></li>
+                    <li><a href="#profile" id="userID"></a></li>
                     <li><a href="#logout">Logout</a></li>
                 </ul>
             </div>
@@ -37,12 +37,18 @@
     <main>
         <div class="container">
 
-            <div>
+            <div class="row">
+              <div class="col">
                 <button id="addContest" class="btn btn-success btn-block" style="font-size: larger;white-space: normal;">Add Contest</button>
-                <br>
+              </div>
             </div>
-            <table id="contestTable" class="table table-hover" style="background-color: white;"></table>
-
+            <br>
+            <div class="row">
+              <div class="col">
+                <table id="contestTable" class="table table-hover" style="background-color: white;"></table>
+              </div>
+            </div>
+          
             <div class="modal fade" id="myModal" role="dialog">
                 <div class="modal-dialog">
                 
@@ -67,6 +73,8 @@
                   
                 </div>
               </div>
+
+
 
 
         </div>

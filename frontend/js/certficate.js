@@ -7,9 +7,11 @@ $(document).ready(()=>{
         url: '/api/participant/getCertificate',
         type: 'GET',
         success: (result)=>{
-            // console.log(result.simple.main)
-            $('#style').html(result.simple.style)
-            $('#main').html(result.simple.main)
+            var select = localStorage.templateModel
+            // console.log(result[select])
+
+            $('#style').html(result[select].style)
+            $('#main').html(result[select].main)
 
         }
     })

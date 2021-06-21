@@ -30,6 +30,8 @@ function fillTable(){
 
 $(document).ready(()=>{
 
+    $("#userID").html("Welcome "+localStorage.username)
+
     fillTable();
 
     $("#addContest").click(()=>{

@@ -35,9 +35,10 @@ router.get("/:userid", (req, res) => {
 })
 router.post("/resendVerificationEmail", async(req, res, next) => {
     const { email } = req.body;
+    console.log(req.body);
     const user = await User.findOne({ email });
     if (user) {
-
+         console.log(user);
         if (user.verificationKey == null) {
             return res.status(200).json({ message: "already verified" })
         }
@@ -48,8 +49,8 @@ router.post("/resendVerificationEmail", async(req, res, next) => {
             .then((result) => {
                 const msg = {
                     to: email,
-                    from: process.env.sendgridEmail,
-                    subject: "OCCUPAY: Email Verification",
+                    from: config.sendgridEmail,
+                    subject: "Get Certified: Email Verification",
                     text: " ",
                     html: emailTemplates.VERIFY_EMAIL(result),
                 };
@@ -289,7 +290,6 @@ router.post("/forgot", (req, res) => {
                         text: " ",
                         html: emailTemplates.FORGOT_PASSWORD(result),
                     };
-
                     sgMail
                         .send(msg)
                         .then((result) => {
@@ -307,7 +307,9 @@ router.post("/forgot", (req, res) => {
                 }
             });
         } else {
-            res.status(400).send("email is incorrect");
+            res.status(401).json({
+                message: "Your Email Is Incorrect",
+            });
         }
     });
 });
