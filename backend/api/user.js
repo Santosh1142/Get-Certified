@@ -313,35 +313,6 @@ router.post("/forgot", (req, res) => {
 });
 
 router.post("/resetpass", async(req, res) => {
-    /*if (!req.body.captcha) {
-        return res.status(400).json({
-            message: "No recaptcha token",
-        });
-    }
-    var flag = 0; 
-    request(req.verifyURL, (err, response, body) => {
-        body = JSON.parse(body);
-        console.log(err)
-        console.log(body)
-        try {
-            if (!body.success || body.score < 0.4) {
-                flag = 1
-                return res.status(401).json({
-                    message: "Something went wrong",
-                });
-            }
-            if (err) {
-                return res.status(401).json({
-                    message: err.toString(),
-                });
-            }
-        } catch (err) {
-            return res.status(500).json({
-                error: err
-            })
-        }
-    });
-    console.log(flag) */
     let resetKey = req.body.resetKey;
     let newPassword = req.body.newPassword;
 

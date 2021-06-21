@@ -17,10 +17,8 @@ passport.use(new GoogleStrategy({
     callbackURL: "/api/auth/google/redirect",
   },
   function(request, accessToken, refreshToken, profile, done) {
-    console.log(profile.id);
-    // User.findOrCreate({ googleId: profile.id }, function (err, user) {
-    //   return done(err, user);
-    // });
+    console.log(profile);
+    
     
   }
 ));
@@ -29,8 +27,6 @@ router.get("/google", passport.authenticate("google", { scope: ["profile", "emai
 
 //Callback route for google to redirect
 router.get("/google/redirect",  (req, res, next) => {
-        
-        console.log(req);
         res.redirect("/login");
     }
 );
