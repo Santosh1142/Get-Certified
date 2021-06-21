@@ -33,6 +33,7 @@ function displayTable(){
 $(document).ready(()=>{
 
     $("#stats").hide();
+    // $("#upload-btn").hide();
     $("#userID").html("Welcome "+localStorage.username)
 
     displayTable();
@@ -70,6 +71,31 @@ $(document).ready(()=>{
             // toastr.clear()
         }
     })
+
+
+    $("#upload-btn").click(()=>{
+        $("#myModal").modal("show")
+    })
+
+    $("#formSubmit").click( ()=>{
+        
+        var pFile = $("#file").prop('files')
+        console.log(pFile)
+        // $.ajax({
+        //     url : '/api/participant/uploadCSV',
+        //     type : 'POST',
+        //     data : pFile,
+        //     success : (result)=>{
+        //         console.log(result)
+        //     }
+        // })
+
+
+        $("#myModal").modal("hide");
+
+    });
+
+
 
 
 })
