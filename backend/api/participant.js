@@ -6,6 +6,9 @@ const bcrypt = require("bcrypt");
 const shortid = require("shortid");
 const jwt = require("jsonwebtoken");
 const sgMail = require("@sendgrid/mail");
+var expressFileUpload = require('express-fileupload')
+var csvToJson = require('convert-csv-to-json')
+
 const config=require("../config");
 const emailTemplates = require("../email");
 
@@ -15,6 +18,37 @@ var User= require('../models/user');
 var Contest= require('../models/contest');
 var Participants= require('../models/participants');
 var templates = require('../certificateTemplate')
+
+
+
+router.post("/uploadCSV",(req,res)=>{
+    var fileData = req.files
+    if(fileData){
+        console.log(fileData)
+        var file = fileData.file;
+        var filename = file.name
+        // console.log(filename)
+        file.mv('./uploads/'+filename,(err)=>{
+            if(err){
+                console.log(err)
+                res.send({"msg":"Error"})
+            }
+            else{
+                console.log("uploaded")
+                var json = csvToJson.getJsonFromCsv("./uploads/"+filename);
+                console.log(json)
+                res.send({"msg":"Success", "data": json})
+            }
+        })
+    }
+    else{
+        // console.log("Error")
+        res.send({"msg":"File couldn't be Uploaded"})
+    }
+})
+
+// var json = csvToJson.getJsonFromCsv("./uploads/participants.csv");
+// console.log(json)
 
 router.post("/add/:contestid", async (req,res)=>
 {
