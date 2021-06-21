@@ -1,7 +1,7 @@
-_id;contestName;contestId;name;email;rank;certified;emailsent;passkey;isDeleted
-60cb11464fa54e3b24r4af5e2;CORONO;60cc7685775bd62208a834fb;Pranay;pranay@gmail.com;5;true;true;BqvPVMt4N;false
-60cb11464fa54e3b243af5e42;CORONO;60cc7685775bd62208a834fb;Nikhil;nikhil@gmail.com;1;true;true;BqvPVws4N;false
-60cb1146fa54e3b23e23af5e2;CORONO;60cc7685775bd62208a834fb;Venkatesh;venkatesh@gmail.com;2;false;false;BwsxVMt4N;false
-60cb11464fa54e3b24332245t;CORONO;60cc7685775bd62208a834fb;Dheeraj;dheeraj@gmail.com;3;true;true;BqvPV12wsN;false
-60cb11464fa54e3b243aws4e2;CORONO;60cc7685775bd62208a834fb;Nagasai;nagasai@gmail.com;4;false;false;Bqvwa1Mt4N;false
-60cb11464fa54e3b243df43e2;CORONO;60cc7685775bd62208a834fb;Kaushik;kaushik@gmail.com;6;false;false;BqwscPVMt4N;false
+contestName;name;email;rank;
+CORONO;Pranay;pranay@gmail.com;5;
+CORONO;Nikhil;nikhil@gmail.com;1;
+CORONO;Venkatesh;venkatesh@gmail.com;2;
+CORONO;Dheeraj;dheeraj@gmail.com;3;
+CORONO;Nagasai;nagasai@gmail.com;4;
+CORONO;Kaushik;kaushik@gmail.com;6;

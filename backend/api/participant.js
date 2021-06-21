@@ -36,33 +36,33 @@ router.post("/uploadCSV",(req,res)=>{
             else{
                 console.log("uploaded")
                 var json = csvToJson.getJsonFromCsv("./uploads/"+filename);
-                console.log(json)
+                // console.log(json)
                 res.send({"msg":"Success", "data": json})
             }
         })
     }
     else{
-        // console.log("Error")
+        console.log("Error")
         res.send({"msg":"File couldn't be Uploaded"})
     }
 })
 
-// var json = csvToJson.getJsonFromCsv("./uploads/participants.csv");
-// console.log(json)
 
 router.post("/add/:contestid", async (req,res)=>
 {
+    console.log(req.body)
     console.log(req.params.contestid);
     var data= {
         _id: new mongoose.Types.ObjectId(),
-        contestName : req.body.contestname,
+        contestName : req.body.contestName,
         ContestId: req.params.contestid ,
-        name:"coderi",
+        name: req.body.name,
         passkey: shortid.generate(),
         email: req.body.email,
         rank: req.body.rank,
-        eemailsent: false,
+        emailsent: false,
         certified: false}
+        console.log(data)
     item.createitem(data,Participants, (err, data)=>
     {if (err) { res.status(400).json({ error: err,});
     } else { res.status(200).json({ message: "created" }) }
