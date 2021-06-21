@@ -10,14 +10,15 @@ const router = express.Router();
 var item=require("../itemlib");
 
 
-
 passport.use(new GoogleStrategy({
     clientID:     "31856671834-lcgthafc6opobvo6f8tq1u6ung0stjb0.apps.googleusercontent.com",
-    clientSecret: "ifCYYCOgh3VMPK9UJMWelrhk",
+    clientSecret: "acPWZsv-xCKNW5amEjPvfj0z",
     callbackURL: "/api/auth/google/redirect",
+    passReqToCallback   : true
   },
   function(request, accessToken, refreshToken, profile, done) {
     console.log(profile);
+
     
     
   }
@@ -27,6 +28,7 @@ router.get("/google", passport.authenticate("google", { scope: ["profile", "emai
 
 //Callback route for google to redirect
 router.get("/google/redirect",  (req, res, next) => {
+        //console.log(req);
         res.redirect("/login");
     }
 );

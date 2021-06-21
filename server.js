@@ -33,12 +33,12 @@ mongoose.connection.on('connected', function()
 
 
 
-// var userauth= require("./backend/api/userauth");
-// app.use("/api/auth",userauth);
+var userauth= require("./backend/api/userauth");
+app.use("/api/auth",userauth);
 
 app.use(express.static(__dirname+'/frontend'));
 
-app.use('/api',apis);
+//app.use('/api',apis);
 app.use('/',uis);
 
 
