@@ -86,6 +86,11 @@ $(document).ready(()=>{
             type: 'POST',
             success: (result)=>{
 
+                if(result.msg == "Success"){
+                    toastr.options.closeButton = true;
+                    toastr.success("File Uploaded Successfully")
+                }
+
                 for(let i=0;i<result.data.length;i++){
                     // console.log(result.data[i]);
                     $.ajax({

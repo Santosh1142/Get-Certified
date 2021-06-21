@@ -8,6 +8,7 @@ const jwt = require("jsonwebtoken");
 const sgMail = require("@sendgrid/mail");
 var expressFileUpload = require('express-fileupload')
 var csvToJson = require('convert-csv-to-json')
+const fs = require('fs')
 
 const config=require("../config");
 const emailTemplates = require("../email");
@@ -37,6 +38,13 @@ router.post("/uploadCSV",(req,res)=>{
                 console.log("uploaded")
                 var json = csvToJson.getJsonFromCsv("./uploads/"+filename);
                 // console.log(json)
+                fs.unlink('./uploads/'+filename,(err)=>{
+                    if(err)console.log(err)
+                    else{
+                        console.log("File has been Deleted")
+                    }
+                })
+                
                 res.send({"msg":"Success", "data": json})
             }
         })
