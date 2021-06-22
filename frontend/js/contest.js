@@ -11,12 +11,20 @@ function displayTable(){
             console.log(data)
             data = data.result;
             var t= thead;
+            var t2 = thead;
             var pCount = data.length, certifiedCount = 0;
+            var ti = 1, t2i = 1 ;
             for(let i=0;i<data.length;i++){
                 var certifyClass = "btn btn-danger", certifyState = "Certificate";
-                if(data[i].certified === true){ certifyClass = "btn btn-success"; certifiedCount+=1 }
-                
-                t += "<tr><td>"+(i+1)+"</td><td>"+data[i].email+"</td><td>"+data[i].rank+"</td><td><button id="+data[i]._id+" class='"+certifyClass+"'>"+certifyState+"</button></td></tr>";
+                if(data[i].certified === true){
+                    certifyClass = "btn btn-success"; certifiedCount+=1
+                    t2 += "<tr><td>"+(t2i)+"</td><td>"+data[i].email+"</td><td>"+data[i].rank+"</td><td><button id="+data[i]._id+" class='"+certifyClass+"'>"+certifyState+"</button></td></tr>";
+                    t2i = t2i+1;
+                }
+                else{
+                    t += "<tr><td>"+(ti)+"</td><td>"+data[i].email+"</td><td>"+data[i].rank+"</td><td><button id="+data[i]._id+" class='"+certifyClass+"'>"+certifyState+"</button></td></tr>";
+                    ti = ti+1
+                }
             }
             console.log(localStorage.contestname)
             $("#contestName").html("Contest: "+localStorage.contestname)
@@ -24,10 +32,19 @@ function displayTable(){
             $("#excellence").html("Range of Excellence: 70%")
             $("#pCount").html("Total Participants: "+pCount); $("#certifiedCount").html("Certified Praticipants: "+certifiedCount);
             $("#participantsTable").html(t);
+            $("#certifiedParticipantsTable").html(t2);
             if(data.length){
                 $("#stats").show()
-                $("#sendmail-btn").show()
+                $("#note").hide()
+            }
+            if(ti>1){
                 $("#participantsTable").show();
+                $("#nonCertifiedListHead").show();
+                $("#sendmail-btn").show()
+            }
+            if(t2i>1){
+                $("#certifiedParticipantsTable").show();
+                $("#CertifiedListHead").show()
             }
         }
     })
@@ -39,7 +56,10 @@ $(document).ready(()=>{
     $("#stats").hide();
     $("#sendmail-btn").hide()
     $("#participantsTable").hide();
-    // $("#upload-btn").hide();
+    $("#certifiedParticipantsTable").hide();
+    $("#nonCertifiedListHead").hide();
+    $("#CertifiedListHead").hide()
+    $("#sendmail-btn").hide();
     $("#userID").html("Welcome "+localStorage.username)
 
     displayTable();

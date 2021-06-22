@@ -38,56 +38,88 @@
     <main>
 
 
+      <div class="row">
         <div class="row">
-            <div class="row">
-                <div class="col-sm-8">
-                    <table id="participantsTable" class="table table-hover"></table>
-                    <buttton id="sendmail-btn" class="btn btn-primary btn-block">Send Mails</buttton>
-                </div>
-                <div id="stats" class="col-sm-4">
-                    <br>
-                    <div class="row"> <h2 id="contestName"></h2> </div>
-                    <div class="row"> <h2 id="contestID"></h2> </div>
-                    <div class="row"> <h2 id="pCount"></h2> </div>
-                    <div class="row"> <h2 id="certifiedCount"></h2> </div>
-                    <div class="row"> <h2 id="excellence"></h2> </div>
-                    <br><br>
-                    <div class="row"> <h2>Select your Template: </h2> </div>
-                    <div class="row"> <img class="templateModel" id="simple" src="../img/simple.jpg" alt="Simple" > </div>
-                    <div class="row"> <img class="templateModel" id="simpleTwo" src="../img/simpleTwo.jpg" alt="Simple" > </div>
-                    <br>
-                </div>
-            </div>
+          <div id="stats" class="container col">
             <br>
+            <div class="row"> <h2 id="contestName"></h2> </div>
+            <div class="row"> <h2 id="contestID"></h2> </div>
+            <div class="row"> <h2 id="pCount"></h2> </div>
+            <div class="row"> <h2 id="certifiedCount"></h2> </div>
+            <div class="row"> <h2 id="excellence"></h2> </div>
+            <br>
+            <div class="row"> <h2>Select your Template: </h2> </div>
             <div class="row">
-                <div class="col-sm-8"></div>
-                <div class="col-sm-4">
-                    <buttton id="upload-btn" class="btn btn-success btn-block">Upload .csv File</buttton>
-                </div>
+              <div class="col-sm-4"> <img class="templateModel" id="simple" src="../img/simple.jpg" alt="Simple" > </div>
+              <div class="col-sm-4"> <img class="templateModel" id="simpleTwo" src="../img/simpleTwo.jpg" alt="Simple" > </div>
+              <br>
             </div>
+            <br><br>
+          </div>
 
-            <div class="modal fade" id="myModal" role="dialog">
-                <div class="modal-dialog">
-                
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h4 class="modal-title" >Upload Participant Details</h4>
-                      <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    </div>
-                    <div class="modal-body">
+        </div>
 
-                      <!-- <form id="uploadForm" action="/api/participant/uploadCSV" method="post" enctype="multipart/form-data"> -->
-                        <input id="file" name="file" type="file" class="form-control" style="font-size: medium;" >
-                        <br>
-                        <button id="formSubmit" class="btn btn-primary btn-block" style="font-size: large;white-space: normal;">Upload .CSV file</button>
-                      <!-- </form> -->
 
-                    </div>
-                    
-                  </div>
-                  
-                </div>
+        <div class="row"> <h3 id="note" style="text-align: center;color: rgb(131, 131, 131);font-weight: 300;">Add your Participants through .csv File</h3> </div>
+        <div class="container">
+          <div class="row">
+            <div class="col">
+                <buttton id="upload-btn" class="btn btn-success btn-block">Upload .csv File</buttton>
+            </div>
+          </div>
+        </div>
+        <br><br>
+
+
+        <div class="row">
+            <div class="col-sm-5">
+              <h2 id="nonCertifiedListHead">Non-Certified List</h2>
+              <table id="participantsTable" class="table table-hover"></table>
+              <buttton id="sendmail-btn" class="btn btn-primary btn-block">Send Mails</buttton>
+              <br>
+            </div>
+            <div class="col-sm-2"></div>
+            <div class="col-sm-5">
+              <h2 id="CertifiedListHead">Certified List</h2>
+              <table id="certifiedParticipantsTable" class="table table-hover"></table>
+            </div>
+        </div>
+
+
+        <div class="modal fade" id="myModal" role="dialog">
+          <div class="modal-dialog">
+          
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title" >Upload Participant Details</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
               </div>
+              <div class="modal-body">
+
+                <!-- <form id="uploadForm" action="/api/participant/uploadCSV" method="post" enctype="multipart/form-data"> -->
+                  <input id="file" name="file" type="file" class="form-control" style="font-size: medium;" >
+                  <br>
+                  <button id="formSubmit" class="btn btn-primary btn-block" style="font-size: medium;white-space: normal;">Upload .CSV file</button>
+                <!-- </form> -->
+
+              </div>
+              
+            </div>
+            
+          </div>
+        </div>
+
+
+      </div>
+<!-- ===== -->
+
+        <div class="row">
+            
+            <br>
+            
+
+
+            
 
         </div>
 

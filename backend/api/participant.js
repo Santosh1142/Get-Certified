@@ -152,6 +152,8 @@ router.get('/sendmail/:contestid', async(req, res) => {
             var l=data.length
             for(var i=0;i<l;i++)
             {   
+                if(data[i].certified == true)continue;
+
                 participantdata={name:data[i].name,
                                  passkey:data[i].passkey,
                                  contestname:data[i].contestName,
