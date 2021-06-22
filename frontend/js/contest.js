@@ -24,8 +24,10 @@ function displayTable(){
             $("#excellence").html("Range of Excellence: 70%")
             $("#pCount").html("Total Participants: "+pCount); $("#certifiedCount").html("Certified Praticipants: "+certifiedCount);
             $("#participantsTable").html(t);
-            $("#stats").show()
-            if(data.length)$("#sendmail-btn").show()
+            if(data.length){
+                $("#stats").show()
+                $("#sendmail-btn").show()
+            }
         }
     })
 
@@ -45,10 +47,15 @@ $(document).ready(()=>{
         var btnClass = $(e.target).attr('class')
         
         if(btnClass == "btn btn-success" || btnClass == "btn btn-danger"){
-            console.log(btn)
+            // console.log(btn)
             localStorage.currentParticipantID = btn;
 
-            window.location.href = `/${contestid}/${btn}`
+            if(localStorage.templateModel == null){
+                toastr.options.closeButton = true;
+                toastr.error("Please Choose a template")
+            }
+            else
+                window.location.href = `/${contestid}/${btn}`
         }
 
     })
