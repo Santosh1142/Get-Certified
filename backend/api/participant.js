@@ -6,6 +6,10 @@ const bcrypt = require("bcrypt");
 const shortid = require("shortid");
 const jwt = require("jsonwebtoken");
 const sgMail = require("@sendgrid/mail");
+var expressFileUpload = require('express-fileupload')
+var csvToJson = require('convert-csv-to-json')
+const fs = require('fs')
+
 const config=require("../config");
 const emailTemplates = require("../email");
 
@@ -16,19 +20,57 @@ var Contest= require('../models/contest');
 var Participants= require('../models/participants');
 var templates = require('../certificateTemplate')
 
+
+
+router.post("/uploadCSV",(req,res)=>{
+    var fileData = req.files
+    if(fileData){
+        console.log(fileData)
+        var file = fileData.file;
+        var filename = file.name
+        // console.log(filename)
+        file.mv('./uploads/'+filename,(err)=>{
+            if(err){
+                console.log(err)
+                res.send({"msg":"Error"})
+            }
+            else{
+                console.log("uploaded")
+                var json = csvToJson.getJsonFromCsv("./uploads/"+filename);
+                // console.log(json)
+                fs.unlink('./uploads/'+filename,(err)=>{
+                    if(err)console.log(err)
+                    else{
+                        console.log("File has been Deleted")
+                    }
+                })
+                
+                res.send({"msg":"Success", "data": json})
+            }
+        })
+    }
+    else{
+        console.log("Error")
+        res.send({"msg":"File couldn't be Uploaded"})
+    }
+})
+
+
 router.post("/add/:contestid", async (req,res)=>
 {
+    console.log(req.body)
     console.log(req.params.contestid);
     var data= {
         _id: new mongoose.Types.ObjectId(),
-        contestName : req.body.contestname,
+        contestName : req.body.contestName,
         ContestId: req.params.contestid ,
-        name:"coderi",
+        name: req.body.name,
         passkey: shortid.generate(),
         email: req.body.email,
         rank: req.body.rank,
-        eemailsent: false,
+        emailsent: false,
         certified: false}
+        console.log(data)
     item.createitem(data,Participants, (err, data)=>
     {if (err) { res.status(400).json({ error: err,});
     } else { res.status(200).json({ message: "created" }) }

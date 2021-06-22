@@ -33,6 +33,7 @@ function displayTable(){
 $(document).ready(()=>{
 
     $("#stats").hide();
+    // $("#upload-btn").hide();
     $("#userID").html("Welcome "+localStorage.username)
 
     displayTable();
@@ -44,14 +45,6 @@ $(document).ready(()=>{
         if(btnClass == "btn btn-success" || btnClass == "btn btn-danger"){
             console.log(btn)
             localStorage.currentParticipantID = btn;
-
-            // var participantsData = JSON.parse(localStorage.currentList)
-            // for(let i=0;i<participantsData.length;i++){
-            //     if(participantsData[i].email == btn){
-            //         localStorage.currentParticipant = JSON.stringify(participantsData[i]);
-            //         break;
-            //     }
-            // }
 
             window.location.href = `/${contestid}/${btn}`
         }
@@ -70,6 +63,56 @@ $(document).ready(()=>{
             // toastr.clear()
         }
     })
+
+
+    $("#upload-btn").click(()=>{
+        $("#myModal").modal("show")
+    })
+
+    $("#formSubmit").click( ()=>{
+        
+        var data = new FormData();
+        $.each($('#file')[0].files, (i, file)=>{
+            data.append('file', file);
+            // console.log(file)
+        });
+        $.ajax({
+            url: '/api/participant/uploadCSV',
+            data: data,
+            cache: false,
+            contentType: false,
+            processData: false,
+            method: 'POST',
+            type: 'POST',
+            success: (result)=>{
+
+                if(result.msg == "Success"){
+                    toastr.options.closeButton = true;
+                    toastr.success("File Uploaded Successfully")
+                }
+
+                for(let i=0;i<result.data.length;i++){
+                    // console.log(result.data[i]);
+                    $.ajax({
+                        url: `/api/participant/add/${contestid}`,
+                        type : 'POST',
+                        data : result.data[i],
+                        success : (result)=>{
+                            console.log(i+1+" "+result)
+                        }
+                    })
+                }
+                displayTable();
+
+            }
+        });
+
+
+        $("#myModal").modal("hide");
+
+    });
+
+
 
 
 })
