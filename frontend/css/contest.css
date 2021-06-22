@@ -56,10 +56,10 @@ button{
     vertical-align: middle;
 }
 .modal-dialog {
-    height: 65%;
+    height: 72%;
 }
 .modal-content {
-    height: 75%;
+    height: 90%;
 }
 
 #upload-btn{
@@ -68,4 +68,15 @@ button{
 }
 #sendmail-btn{
     font-size: medium;
+}
+
+#formSubmit{
+    margin-top: 10px;
+}
+
+#csv-img{
+    width: 70%;
+    height: 200px;
+    border: 1px solid black;
+    margin-bottom: 10px;
 }
