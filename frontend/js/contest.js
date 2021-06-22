@@ -18,8 +18,8 @@ function displayTable(){
                 
                 t += "<tr><td>"+(i+1)+"</td><td>"+data[i].email+"</td><td>"+data[i].rank+"</td><td><button id="+data[i]._id+" class='"+certifyClass+"'>"+certifyState+"</button></td></tr>";
             }
-            console.log(data[0].contestName)
-            $("#contestName").html("Contest: "+(data[0].contestName))
+            console.log(localStorage.contestname)
+            $("#contestName").html("Contest: "+localStorage.contestname)
             // $("#contestID").html("C-ID: "+(data[0].ContestId))
             $("#excellence").html("Range of Excellence: 70%")
             $("#pCount").html("Total Participants: "+pCount); $("#certifiedCount").html("Certified Praticipants: "+certifiedCount);
@@ -27,6 +27,7 @@ function displayTable(){
             if(data.length){
                 $("#stats").show()
                 $("#sendmail-btn").show()
+                $("#participantsTable").show();
             }
         }
     })
@@ -37,6 +38,7 @@ $(document).ready(()=>{
 
     $("#stats").hide();
     $("#sendmail-btn").hide()
+    $("#participantsTable").hide();
     // $("#upload-btn").hide();
     $("#userID").html("Welcome "+localStorage.username)
 
@@ -103,7 +105,7 @@ $(document).ready(()=>{
                 for(let i=0;i<result.data.length;i++){
                     // console.log(result.data[i]);
                     $.ajax({
-                        url: `/api/participant/add/${contestid}`,
+                        url: `/api/participant/add/${localStorage.contestname}/${contestid}`,
                         type : 'POST',
                         data : result.data[i],
                         success : (result)=>{
