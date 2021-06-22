@@ -25,6 +25,7 @@ function displayTable(){
             $("#pCount").html("Total Participants: "+pCount); $("#certifiedCount").html("Certified Praticipants: "+certifiedCount);
             $("#participantsTable").html(t);
             $("#stats").show()
+            if(data.length)$("#sendmail-btn").show()
         }
     })
 
@@ -33,6 +34,7 @@ function displayTable(){
 $(document).ready(()=>{
 
     $("#stats").hide();
+    $("#sendmail-btn").hide()
     // $("#upload-btn").hide();
     $("#userID").html("Welcome "+localStorage.username)
 
@@ -112,6 +114,18 @@ $(document).ready(()=>{
 
     });
 
+
+    $("#sendmail-btn").click(()=>{
+
+        $.ajax({
+            url:`/api/participant/sendmail/${contestid}`,
+            type:'GET',
+            success : (data)=>{
+                console.log(data)
+            }
+        })
+
+    })
 
 
 
