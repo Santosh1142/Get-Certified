@@ -6,7 +6,6 @@ const bcrypt = require("bcrypt");
 const shortid = require("shortid");
 const jwt = require("jsonwebtoken");
 const sgMail = require("@sendgrid/mail");
-var expressFileUpload = require('express-fileupload')
 var csvToJson = require('convert-csv-to-json')
 const fs = require('fs')
 
@@ -153,10 +152,10 @@ router.get('/sendmail/:contestid', async(req, res) => {
             var l=data.length
             for(var i=0;i<l;i++)
             {   
-                participantdata={name:"Buddy",
+                participantdata={name:data[i].name,
                                  passkey:data[i].passkey,
                                  contestname:data[i].contestName,
-                                 URL:"http://localhost:3000/getcertified/"+data[i].ContestId
+                                 URL:"http://localhost:3000/getcertified/"+data[i].ContestId+data[i].passkey //change to deploy
                                 }
                 const msg = {
                     to: data[i].email,
