@@ -18,19 +18,13 @@
     <br>
     <main id="main"></main>
     <br>
-    <button onclick="generatePDF()">Download Pdf</button>
+    <div class="container">
+        <button id="download-pdf" class="btn btn-primary btn-block" >Download Pdf</button>
+        <br>
+    </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/js/bootstrap.min.js" integrity="sha512-EKWWs1ZcA2ZY9lbLISPz8aGR2+L7JVYqBAYTq5AXgBkSjRSuQEGqWx8R1zAX16KdXPaCjOCaKE8MCpU0wcHlHA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="../js/certficate.js"></script>
    
-    <script>
-        function generatePDF() {
-           
-    const element  =document.getElementById("main");
-    html2pdf()
-    .from(element)
-    .save();
-   }
-        </script>
 </body>
 </html>

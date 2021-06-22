@@ -91,7 +91,7 @@ router.post('/delete/:id', async(req, res) => {
 
 router.patch("/makecertified", async(req, res, next) => {
     console.log(req.body)
-    var query={passkey: req.body.passkey, ContestId: req.body.contestid};
+    var query={passkey: req.body.passkey, ContestId: req.body.ContestId};
 
     item.getItemByQuery(query, Participants, (err, data) => {
         if (err) {

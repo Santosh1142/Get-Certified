@@ -139,17 +139,3 @@ $(document).ready(()=>{
 
 
 })
-
-//Kaushik mowa, this the ajax for sending mails to all the participants
-// add a button and invoke this function  on click
-
-// function test()
-// {
-//     $.ajax({
-//         url:`/api/participant/sendmail/${contestid}`,
-//         type:'GET',
-//         success : (data)=>{
-//             console.log(data)
-//         }
-//     })
-// }

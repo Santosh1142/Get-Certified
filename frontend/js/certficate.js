@@ -20,7 +20,13 @@ $(document).ready(()=>{
         type: 'GET',
         success: (data)=>{
             console.log(data)
-            // console.log(data.result[0].contestName)
+            var detail = {
+                passkey: data.result[0].passkey,
+                ContestId: data.result[0].ContestId,
+                name: data.result[0].name
+            }
+            localStorage.certifyData = JSON.stringify(detail)
+
             $("#org").html(data.result[0].contestName);$("#head").html("Certificate of Appreciation");
             var date = new Date();
             var issuedOn = date.getUTCDate() +" "+ date.getUTCMonth() +" "+ date.getUTCFullYear();
@@ -28,6 +34,27 @@ $(document).ready(()=>{
             $("#remarks").html(" And appreciating his/her efforts in the Contest.");$("#issuer").html("Get-Certified");
             $("#host").html(data.result[0].contestName);$("#sponsor").html("CMR")
         }
+    })
+
+    $("#download-pdf").click(()=>{
+
+        var certifiedData = JSON.parse(localStorage.certifyData)
+        console.log(certifiedData)
+        
+
+        $.ajax({
+            url: '/api/participant/makecertified',
+            data: certifiedData,
+            type: 'PATCH',
+            success: (result)=>{
+                console.log(result)
+            }
+        })
+
+        var element = document.getElementById("main");
+            html2pdf()
+            .from(element)
+            .save();
     })
 
 
