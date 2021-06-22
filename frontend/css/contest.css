@@ -9,7 +9,7 @@ td,th{
 h2{
     margin-top: 5px;
     margin-bottom: 5px;
-    margin-left: 10px;
+    margin-left: 20px;
 }
 
 .templateModel{
@@ -36,6 +36,7 @@ h2{
 }
 button{
     box-shadow: 0 3px 7px 0 rgba(14, 14, 14, 0.1), 0 5px 19px 0 rgba(12, 12, 12, 0.1);
+    font-size: medium;
 }
 
 .modal {
@@ -59,4 +60,12 @@ button{
 }
 .modal-content {
     height: 75%;
+}
+
+#upload-btn{
+    margin-top: 10px;
+    font-size: medium;
+}
+#sendmail-btn{
+    font-size: medium;
 }

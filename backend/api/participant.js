@@ -55,13 +55,13 @@ router.post("/uploadCSV",(req,res)=>{
 })
 
 
-router.post("/add/:contestid", async (req,res)=>
+router.post("/add/:contestname/:contestid", async (req,res)=>
 {
     console.log(req.body)
     console.log(req.params.contestid);
     var data= {
         _id: new mongoose.Types.ObjectId(),
-        contestName : req.body.contestName,
+        contestName : req.params.contestname,
         ContestId: req.params.contestid ,
         name: req.body.name,
         passkey: shortid.generate(),
@@ -91,7 +91,7 @@ router.post('/delete/:id', async(req, res) => {
 
 router.patch("/makecertified", async(req, res, next) => {
     console.log(req.body)
-    var query={passkey: req.body.passkey, ContestId: req.body.contestid};
+    var query={passkey: req.body.passkey, ContestId: req.body.ContestId};
 
     item.getItemByQuery(query, Participants, (err, data) => {
         if (err) {
@@ -152,6 +152,8 @@ router.get('/sendmail/:contestid', async(req, res) => {
             var l=data.length
             for(var i=0;i<l;i++)
             {   
+                if(data[i].certified == true)continue;
+
                 participantdata={name:data[i].name,
                                  passkey:data[i].passkey,
                                  contestname:data[i].contestName,

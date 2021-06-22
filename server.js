@@ -1,7 +1,6 @@
 var express = require('express');
 var app = express();
 var mongoose= require('mongoose');
-//const bodyParser = require("body-parser");
 var passport = require('passport');
 const sgMail = require("@sendgrid/mail");
 var expressFileUpload = require('express-fileupload')
