@@ -84,7 +84,6 @@ $(document).ready(()=>{
 
 
     $(this).click((e)=>{
-        // console.log("simpleTwo");
         var tID = $(e.target).attr('id')
         var tClass = $(e.target).attr('class')
         if(tClass == "templateModel"){
@@ -100,7 +99,7 @@ $(document).ready(()=>{
         $("#myModal").modal("show")
     })
 
-    $("#formSubmit").click( ()=>{
+    $("#formSubmit").click(()=>{
         
         var data = new FormData();
         $.each($('#file')[0].files, (i, file)=>{
