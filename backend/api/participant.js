@@ -44,7 +44,7 @@ router.post("/uploadCSV",(req,res)=>{
                     }
                 })
                 
-                res.send({"msg":"Success", "data": json})
+                res.send({msg:"Success", data: json})
             }
         })
     }

@@ -6,7 +6,6 @@ const bcrypt = require("bcrypt");
 const shortid = require("shortid");
 const jwt = require("jsonwebtoken");
 const sgMail = require("@sendgrid/mail");
-//const emailTemplates = require("");
 
 
 var item= require('../itemlib');
@@ -59,6 +58,7 @@ router.get('/details/:id', async(req, res) => {
         }
     })
 })
+
 
 // router.get('/addmembers/:contestid', async(req, res) => {
 //     console.log((req.body.participants).length);
