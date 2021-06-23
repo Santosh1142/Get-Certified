@@ -57,23 +57,29 @@ router.post("/uploadCSV",(req,res)=>{
 
 router.post("/add/:contestname/:contestid", async (req,res)=>
 {
-    console.log(req.body)
+    // console.log(req.body.data)
+    fs.writeFileSync("temp.csv",req.body.data)
+    var json = csvToJson.getJsonFromCsv("temp.csv");
     console.log(req.params.contestid);
-    var data= {
-        _id: new mongoose.Types.ObjectId(),
-        contestName : req.params.contestname,
-        ContestId: req.params.contestid ,
-        name: req.body.name,
-        passkey: shortid.generate(),
-        email: req.body.email,
-        rank: req.body.rank,
-        emailsent: false,
-        certified: false}
-        console.log(data)
-    item.createitem(data,Participants, (err, data)=>
-    {if (err) { res.status(400).json({ error: err,});
-    } else { res.status(200).json({ message: "created" }) }
-   })
+    
+    for(let i=0;i<json.length;i++){
+        var data= {
+            _id: new mongoose.Types.ObjectId(),
+            contestName : req.params.contestname,
+            ContestId: req.params.contestid ,
+            name: json[i].name,
+            passkey: shortid.generate(),
+            email: json[i].email,
+            rank: json[i].rank,
+            emailsent: false,
+            certified: false
+        }
+        // console.log(data)
+        item.createitem(data,Participants, (err, data)=>
+        {if (err) { res.status(400).json({ error: err,});
+        } else { res.status(200).json({ message: "created" }) }
+        })
+    }
 })
 
 router.post('/delete/:id', async(req, res) => {
