@@ -116,6 +116,7 @@ $(document).ready(()=>{
             method: 'POST',
             type: 'POST',
             success: (result)=>{
+                console.log(result)
 
                 if(result.msg == "Success"){
                     toastr.options.closeButton = true;
