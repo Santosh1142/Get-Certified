@@ -31,7 +31,7 @@ $(document).ready(()=>{
             var date = new Date();
             var issuedOn = date.getUTCDate() +" "+ date.getUTCMonth() +" "+ date.getUTCFullYear();
             $("#issued").html(issuedOn);$("#name").html(data.result[0].name);
-            $("#remarks").html(" And appreciating his/her efforts in the Contest.");$("#issuer").html("Get-Certified");
+            $("#remarks").html("And appreciating his/her efforts in the Contest.");$("#issuer").html("Get-Certified");
             $("#host").html(data.result[0].contestName);$("#sponsor").html("CMR")
         }
     })
