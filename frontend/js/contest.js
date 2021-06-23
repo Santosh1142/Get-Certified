@@ -101,43 +101,6 @@ $(document).ready(()=>{
 
     $("#formSubmit").click(()=>{
         
-        // var data = new FormData();
-        // $.each($('#file')[0].files, (i, file)=>{
-        //     data.append('file', file);
-        //     // console.log(file)
-        // });
-        // $.ajax({
-        //     url: '/api/participant/uploadCSV',
-        //     data: data,
-        //     cache: false,
-        //     contentType: false,
-        //     processData: false,
-        //     method: 'POST',
-        //     type: 'POST',
-        //     success: (result)=>{
-        //         console.log(result)
-
-        //         if(result.msg == "Success"){
-        //             toastr.options.closeButton = true;
-        //             toastr.success("File Uploaded Successfully")
-        //         }
-
-        //         for(let i=0;i<result.data.length;i++){
-        //             // console.log(result.data[i]);
-        //             $.ajax({
-        //                 url: `/api/participant/add/${localStorage.contestname}/${contestid}`,
-        //                 type : 'POST',
-        //                 data : result.data[i],
-        //                 success : (result)=>{
-        //                     console.log(i+1+" "+result)
-        //                 }
-        //             })
-        //         }
-        //         displayTable();
-
-        //     }
-        // });
-
         var file = document.getElementById('file').files[0];           
         var reader = new FileReader();
         reader.onload = function(event) {
@@ -146,17 +109,27 @@ $(document).ready(()=>{
             }
             console.log(st);
             $.ajax({
-                url: `/api/participant/add/${localStorage.contestname}/${contestid}`,
+                url: `/api/participant/uploadCSV`,
                 type: 'POST',
                 data: st,
                 success: (result)=>{
-                    console.log(result)
+                    // console.log(result.length)
+                    for(var i=0;i<result.length;i++){
+                        console.log(result[i])
+                        $.ajax({
+                            url: `/api/participant/add/${localStorage.contestname}/${contestid}`,
+                            type: 'POST',
+                            data: result[i],
+                            success: (result) => {
+                                console.log(result)
+                            }
+                        })
+                    }
+                    displayTable();
                 }
             })
-            displayTable();
         }
         reader.readAsText(file)
-
 
         $("#myModal").modal("hide");
 
