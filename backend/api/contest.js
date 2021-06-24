@@ -25,7 +25,10 @@ router.post("/add/:userid", async (req,res)=>
         userId: req.params.userid ,
         userName: req.body.username,
         creationtime:  new Date().getTime(),
-        isDeleted: false}
+        isDeleted: false,
+        organisation: req.body.organisation,
+        description: req.body.description
+    }
     item.createitem(data,Contest, (err, data)=>
     {if (err) { res.status(400).json({ error: err,});
     } else { res.status(200).json({ message: "created" }) }
