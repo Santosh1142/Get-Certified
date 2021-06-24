@@ -51,10 +51,13 @@ $(document).ready(()=>{
             }
         })
 
-        var element = document.getElementById("main");
-            html2pdf()
-            .from(element)
-            .save();
+        // var element = document.getElementById("main");
+        //     html2pdf()
+        //     .from(element)
+        //     .save();
+        $("#download-pdf").hide()
+        window.print()
+        $("#download-pdf").show()
     })
 
 
