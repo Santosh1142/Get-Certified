@@ -1,6 +1,7 @@
 var templates = {
     simple : {
-        style : '#org{ text-align: center;margin-top: 35px;font-family: "Arima Madurai"; }\
+        style : '@page { size: landscape; }\
+                #org{ text-align: center;margin-top: 35px;font-family: "Arima Madurai"; }\
                 #head{ text-align: center;font-family: "Arvo";margin-top: 10px;font-size: 60px; }\
                 #sub-head{ text-align: center;margin-top: 30px;font-family: "Barlow Semi Condensed"; }\
                 #name{ text-align: center;margin-top: 20px;font-family: "Bai Jamjuree";text-decoration: underline; }\
@@ -26,7 +27,8 @@ var templates = {
     },
 
     simpleTwo : {
-        style : '.tag-center{\
+        style : '@page { size: landscape; }\
+                .tag-center{\
                     height: 50px;\
                     width: 80px;\
                     background-color: #ffd000;\
@@ -80,7 +82,7 @@ var templates = {
     },
 
     BZ:{
-        style: '<style id="style" type="text/css">\
+        style: '@page { size: landscape; }\
                     span.cls_009{\
                         font-family: "Aparajita", serif;\
                         font-size: 36.1px;\

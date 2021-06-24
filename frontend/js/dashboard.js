@@ -1,5 +1,5 @@
 
-var thead = "<tr><th>Contest Name</th><th>Created On</th><th>Username</th><th></th></tr>"
+var thead = "<tr><th>Contest Name</th><th>Created On</th><th>Organisation</th><th></th></tr>"
 
 
 function fillTable(){
@@ -14,9 +14,10 @@ function fillTable(){
             for(let i=0;i<data.length;i++){
                 var date = new Date(data[i].creationtime);
                 date=date.toLocaleDateString();
-                t += "<tr id="+data[i].contestname+"><td>"+data[i].contestname+"</td><td>"+date+"</td><td>"+data[i].userName+"</td><td><button id="+data[i]._id+" class='btn btn-primary'>Add Participants Data</button></td></tr>";
+                t += "<tr id="+data[i].contestname+"><td>"+data[i].contestname+"</td><td>"+date+"</td><td>"+data[i].organisation+"</td><td><button id="+data[i]._id+" class='btn btn-primary'>Add Participants Data</button></td></tr>";
             }
-            $("#contestTable").html(t);
+            if(data.length)
+                $("#contestTable").html(t);
         }
     })
 }
@@ -37,8 +38,8 @@ $(document).ready(()=>{
         var contestData = {
             contestname : $("#contestname").val(),
             username : localStorage.username,
-            description : $("descp").val(),
-            organisation : $("organisation").val(),
+            description : $("#descp").val(),
+            organisation : $("#organisation").val()
         }
         
         console.log(contestData)

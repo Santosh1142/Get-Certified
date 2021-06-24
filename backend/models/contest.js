@@ -8,7 +8,9 @@ const contestSchema = mongoose.Schema({
     userName: { type: String, required: true },
     participants:[],
     creationtime: { type: Number},
-    isDeleted: { type: Boolean, default: false }
+    isDeleted: { type: Boolean, default: false },
+    organisation: { type: String, required: true },
+    description: { type: String, required: true }
 });
 
 module.exports = mongoose.model("Contest", contestSchema);
