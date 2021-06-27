@@ -1,5 +1,6 @@
 {
   "name": "get-certified",
+  "version": "1.0.0",
   "description": "Get Certified generates the certificates of contests for users",
   "main": "server.js",
   "scripts": {
