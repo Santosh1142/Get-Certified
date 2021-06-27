@@ -187,5 +187,18 @@ router.get('/:participantID', async(req, res) => {
     })
 })
 
+router.get('/passkey/:key', async(req, res) => {
+    console.log(req.params.key);
+    item.getItemByQuery({ passkey: req.params.key }, Participants, (err, data) => {
+        if (err) {
+            res.status(400).json({
+                error: err,
+            });
+        } else {
+            console.log(data)
+            res.status(200).json({ result: data })
+        }
+    })
+})
 
 module.exports=router;

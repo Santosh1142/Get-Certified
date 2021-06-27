@@ -6,6 +6,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 //app.use(express.static(path.join(__dirname+'/../../frontend')));
 
+app.get("/test", (req,res)=>
+{   var p=path.join(__dirname+'/../../frontend/html/test.html')
+    res.sendFile(p);})
 
 app.get("/", (req,res)=>
 {   var p=path.join(__dirname+'/../../frontend/html/index.html')

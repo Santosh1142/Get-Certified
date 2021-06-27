@@ -34,3 +34,27 @@ function onScroll(event) {
         }
     });
 }
+
+
+function getcertificate()
+{
+    var passkey= document.getElementById("passkey").value;
+    console.log(passkey);
+    $.ajax({
+        type: "GET",
+        url: "/api/participant/passkey/"+passkey,
+        data: {
+        },
+        success: function(data) {
+            //console.log(data.result)
+            window.location.href = "/"+data.result[0].ContestId+"/"+data.result[0]._id;
+        }, //sucess
+        error: function(error) {
+            
+            } //error
+    });
+
+    //s0OeKGEIX
+
+
+}

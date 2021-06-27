@@ -438,6 +438,38 @@ footer a:hover{
     color: #F05F40;
 }
 
+.example30::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+  .example30 input[type=text] {
+    padding: 10px;
+    font-size: 17px;
+    border: 1px solid grey;
+    float: left;
+    width: 60%;
+    height: 40% !important;
+    border-radius: 5px;
+    background: #f1f1f1;
+  }
+  
+  .example30 button {
+    /* float: left; */
+    width: 18%;
+    padding: 10px;
+    background: #2196F3;
+    color: white;
+    font-size: 17px;
+    border: 1px solid grey;
+    border-left: none;
+    cursor: pointer;
+  }
+  
+  .example30 button:hover {
+    background: #0b7dda;
+  }
+
 
 
 
