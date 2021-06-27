@@ -6,7 +6,6 @@ const bcrypt = require("bcrypt");
 const shortid = require("shortid");
 const jwt = require("jsonwebtoken");
 const sgMail = require("@sendgrid/mail");
-//const emailTemplates = require("");
 
 
 var item= require('../itemlib');
@@ -26,7 +25,10 @@ router.post("/add/:userid", async (req,res)=>
         userId: req.params.userid ,
         userName: req.body.username,
         creationtime:  new Date().getTime(),
-        isDeleted: false}
+        isDeleted: false,
+        organisation: req.body.organisation,
+        description: req.body.description
+    }
     item.createitem(data,Contest, (err, data)=>
     {if (err) { res.status(400).json({ error: err,});
     } else { res.status(200).json({ message: "created" }) }
@@ -59,6 +61,7 @@ router.get('/details/:id', async(req, res) => {
         }
     })
 })
+
 
 // router.get('/addmembers/:contestid', async(req, res) => {
 //     console.log((req.body.participants).length);

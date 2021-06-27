@@ -6,8 +6,8 @@ const bcrypt = require("bcrypt");
 const shortid = require("shortid");
 const jwt = require("jsonwebtoken");
 const sgMail = require("@sendgrid/mail");
-var expressFileUpload = require('express-fileupload')
 var csvToJson = require('convert-csv-to-json')
+const fs = require('fs')
 
 const config=require("../config");
 const emailTemplates = require("../email");
@@ -22,51 +22,34 @@ var templates = require('../certificateTemplate')
 
 
 router.post("/uploadCSV",(req,res)=>{
-    var fileData = req.files
-    if(fileData){
-        console.log(fileData)
-        var file = fileData.file;
-        var filename = file.name
-        // console.log(filename)
-        file.mv('./uploads/'+filename,(err)=>{
-            if(err){
-                console.log(err)
-                res.send({"msg":"Error"})
-            }
-            else{
-                console.log("uploaded")
-                var json = csvToJson.getJsonFromCsv("./uploads/"+filename);
-                console.log(json)
-                res.status(200).json({"msg":"Success", "data": json})
-            }
-        })
-    }
-    else{
-        // console.log("Error")
-        res.send({"msg":"File couldn't be Uploaded"})
-    }
+    fs.writeFileSync("temp.csv",req.body.data)
+    var json = csvToJson.getJsonFromCsv("temp.csv");
+    console.log(json)
+    res.json(json)
 })
 
-// var json = csvToJson.getJsonFromCsv("./uploads/participants.csv");
-// console.log(json)
 
-router.post("/add/:contestid", async (req,res)=>
+router.post("/add/:contestname/:contestid", async (req,res)=>
 {
+    console.log(req.body)
     console.log(req.params.contestid);
+    
     var data= {
         _id: new mongoose.Types.ObjectId(),
-        contestName : req.body.contestname,
+        contestName : req.params.contestname,
         ContestId: req.params.contestid ,
-        name:"coderi",
+        name: req.body.name,
         passkey: shortid.generate(),
         email: req.body.email,
         rank: req.body.rank,
-        eemailsent: false,
-        certified: false}
+        emailsent: false,
+        certified: false
+    }
+    // console.log(data)
     item.createitem(data,Participants, (err, data)=>
     {if (err) { res.status(400).json({ error: err,});
     } else { res.status(200).json({ message: "created" }) }
-   })
+    })
 })
 
 router.post('/delete/:id', async(req, res) => {
@@ -84,7 +67,7 @@ router.post('/delete/:id', async(req, res) => {
 
 router.patch("/makecertified", async(req, res, next) => {
     console.log(req.body)
-    var query={passkey: req.body.passkey, ContestId: req.body.contestid};
+    var query={passkey: req.body.passkey, ContestId: req.body.ContestId};
 
     item.getItemByQuery(query, Participants, (err, data) => {
         if (err) {
@@ -145,10 +128,12 @@ router.get('/sendmail/:contestid', async(req, res) => {
             var l=data.length
             for(var i=0;i<l;i++)
             {   
-                participantdata={name:"Buddy",
+                if(data[i].certified == true)continue;
+
+                participantdata={name:data[i].name,
                                  passkey:data[i].passkey,
                                  contestname:data[i].contestName,
-                                 URL:"http://localhost:3000/getcertified/"+data[i].ContestId
+                                 URL:"https://get-certified.herokuapp.com/getcertified/"+data[i].ContestId+data[i].passkey //change to deploy
                                 }
                 const msg = {
                     to: data[i].email,

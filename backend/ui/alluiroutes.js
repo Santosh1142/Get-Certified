@@ -40,6 +40,10 @@ app.get("/contest/:contestid", (req,res)=>
 {   var p=path.join(__dirname+'/../../frontend/html/frgtpswrd.html')
     res.sendFile(p);})
 
+    app.get("/example", (req,res)=>
+{   var p=path.join(__dirname+'/../../frontend/html/example.html')
+    res.sendFile(p);})
+
 
 app.get("/:contestid/:participantid", (req,res)=>
 {   var p=path.join(__dirname+'/../../frontend/html/certificate.html')

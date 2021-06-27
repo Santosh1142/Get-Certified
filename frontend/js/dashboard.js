@@ -1,13 +1,6 @@
 
-var thead = "<tr><th>Contest Name</th><th>Created On</th><th>Username</th><th></th></tr>"
+var thead = "<tr><th>Contest Name</th><th>Created On</th><th>Organisation</th><th></th></tr>"
 
-// function displayTable(data){
-//     console.log(data)
-//     var t = thead;
-//     for(let i=0;i<data.length;i++)
-//         t += "<tr><td>"+data[i].contestname+"</td><td>"+data[i].userid+"</td><td>"+data[i].userName+"</td><td><button id="+data[i].userid+" class='btn btn-primary'>Add Participants Data</button></td></tr>";
-//     $("#contestTable").html(t);
-// }
 
 function fillTable(){
    // console.log(localStorage.userid);
@@ -21,9 +14,10 @@ function fillTable(){
             for(let i=0;i<data.length;i++){
                 var date = new Date(data[i].creationtime);
                 date=date.toLocaleDateString();
-                t += "<tr><td>"+data[i].contestname+"</td><td>"+date+"</td><td>"+data[i].userName+"</td><td><button id="+data[i].userId+" class='btn btn-primary'>Add Participants Data</button></td></tr>";
+                t += "<tr id="+data[i].contestname+"><td>"+data[i].contestname+"</td><td>"+date+"</td><td>"+data[i].organisation+"</td><td><button id="+data[i]._id+" class='btn btn-primary'>Add Participants Data</button></td></tr>";
             }
-            $("#contestTable").html(t);
+            if(data.length)
+                $("#contestTable").html(t);
         }
     })
 }
@@ -43,9 +37,9 @@ $(document).ready(()=>{
     $("#formSubmit").click(()=>{
         var contestData = {
             contestname : $("#contestname").val(),
-            username : 'Nikhil',
-            description : $("descp").val(),
-            organisation : $("organisation").val(),
+            username : localStorage.username,
+            description : $("#descp").val(),
+            organisation : $("#organisation").val()
         }
         
         console.log(contestData)
@@ -54,7 +48,7 @@ $(document).ready(()=>{
             type : 'POST',
             data : contestData,
             success : (result)=>{
-                // console.log(result)
+                console.log(result)
                 fillTable();
             }
         })
@@ -69,7 +63,10 @@ $(document).ready(()=>{
         var btnClass = $(e.target).attr('class')
         
         if(btnClass == "btn btn-primary"){
-            // console.log(btn)
+            console.log(btn)
+            var contestName = $(e.target).parent().parent().find('td:first-child').text();
+            localStorage.contestname = contestName
+            localStorage.contestID = btn
             window.location.href = `/contest/${btn}`
         }
 
