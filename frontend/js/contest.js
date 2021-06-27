@@ -18,8 +18,8 @@ function displayTable(){
                 
                 t += "<tr><td>"+(i+1)+"</td><td>"+data[i].email+"</td><td>"+data[i].rank+"</td><td><button id="+data[i]._id+" class='"+certifyClass+"'>"+certifyState+"</button></td></tr>";
             }
-            console.log(data[0].contestName)
-            $("#contestName").html("Contest: "+(data[0].contestName))
+            //console.log(data[0].contestName)
+            //$("#contestName").html("Contest: "+(data[0].contestName))
             // $("#contestID").html("C-ID: "+(data[0].ContestId))
             $("#excellence").html("Range of Excellence: 70%")
             $("#pCount").html("Total Participants: "+pCount); $("#certifiedCount").html("Certified Praticipants: "+certifiedCount);
@@ -81,14 +81,14 @@ $(document).ready(()=>{
         
         var pFile = $("#file").prop('files')
         console.log(pFile)
-        // $.ajax({
-        //     url : '/api/participant/uploadCSV',
-        //     type : 'POST',
-        //     data : pFile,
-        //     success : (result)=>{
-        //         console.log(result)
-        //     }
-        // })
+        $.ajax({
+            url : '/api/participant/uploadCSV',
+            type : 'POST',
+            data : pFile,
+            success : (result)=>{
+                console.log(result)
+            }
+        })
 
 
         $("#myModal").modal("hide");

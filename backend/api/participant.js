@@ -37,7 +37,7 @@ router.post("/uploadCSV",(req,res)=>{
                 console.log("uploaded")
                 var json = csvToJson.getJsonFromCsv("./uploads/"+filename);
                 console.log(json)
-                res.send({"msg":"Success", "data": json})
+                res.status(200).json({"msg":"Success", "data": json})
             }
         })
     }
