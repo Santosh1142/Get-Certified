@@ -1,9 +1,5 @@
 {
   "name": "get-certified",
-  "version": "1.0.0",
-  "engines": {
-    "node": "14.x"
-  },
   "description": "Get Certified generates the certificates of contests for users",
   "main": "server.js",
   "scripts": {
