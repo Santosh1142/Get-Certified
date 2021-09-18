@@ -133,7 +133,7 @@ router.get('/sendmail/:contestid', async(req, res) => {
                 participantdata={name:data[i].name,
                                  passkey:data[i].passkey,
                                  contestname:data[i].contestName,
-                                 URL:"https://get-certified.herokuapp.com/getcertified/"+data[i].ContestId+data[i].passkey //change to deploy
+                                 URL:"https://get-certified.herokuapp.com/getcertified/"+data[i].ContestId+data[i]._id //change to deploy
                                 }
                 const msg = {
                     to: data[i].email,
