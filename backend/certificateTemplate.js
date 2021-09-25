@@ -229,7 +229,7 @@ var templates = {
                     }\
                 </style>',
         main: '<div style="position:absolute;left:50%;margin-left:-430px;top:0px;width:860px;height:615px;border-style:outset;overflow:hidden">\
-                    <div style="position:absolute;left:0px;top:0px"> <img src="../img/CMRlogo.PNG" width=860 height=615> </div>\
+                    <div style="position:absolute;left:0px;top:0px"> <img src="../img/BZ.jpg" width=860 height=615> </div>\
                     <div style="position:absolute;left:151.55px;top:61.46px" class="cls_009"><span class="cls_009" style="color: white;" id="head">CERTIFICATE OF COMPLETION</span></div>\
                     <div style="position:absolute;left:151.94px;top:110.00px" class="cls_005"><span class="cls_005" style="color: white;" id="org"></span></div>\
                     <div style="position:absolute;left:302.14px;top:259.95px" class="cls_006"><span class="cls_006">This certificate is presented to</span></div>\
