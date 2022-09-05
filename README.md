@@ -16,7 +16,7 @@ Steps Of Usage:
 
 4.On Dashboard page, click on AddContest to create a Contest.
 
-5.Give the details of contest in the modal popup.
+5.Give the details of contest in the model popup.
 
 6.Click on AddParticipants button to add contestants to selected contest.
 
